@@ -12,8 +12,8 @@ exports.handler = async (event, context) => {
 
   try {
     await client.connect();
-    const db = client.db("clipcraft");            // database name
-    const collection = db.collection("contacts"); // collection name
+    const db = client.db("clipcraft");            // your DB name
+    const collection = db.collection("contacts"); // collection
 
     await collection.insertOne({
       name: body.name,
@@ -27,12 +27,13 @@ exports.handler = async (event, context) => {
       statusCode: 200,
       body: JSON.stringify({ success: true, message: "Submitted Successfully" })
     };
-  } catch (error) {
-    console.error(error);
+
+  } catch (err) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ success: false, error: error.message })
+      body: JSON.stringify({ success: false, error: err.message })
     };
+
   } finally {
     await client.close();
   }
