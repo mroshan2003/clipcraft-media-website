@@ -19,6 +19,7 @@ function Navbar() {
     <>
       <header className="nav">
         <div className="container nav-inner">
+
           <div className="logo">Clipcraft Media</div>
 
           <nav className="nav-links">
@@ -112,7 +113,7 @@ function Hero() {
 /* ========= ENHANCED PORTFOLIO CLIENTS ========= */
 
 function MarqueeClients() {
-  const logos = ["c1.png", "c2.png", "c3.png", "c4.png", "c5.png", "c6.png"];
+  const logos = ["c1.png", "c2.png", "c3.png", "c4.png", "c5.png"];
 
   return (
     <section className="clients-section reveal">

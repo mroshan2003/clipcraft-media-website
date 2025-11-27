@@ -347,9 +347,9 @@ body {
 }
 
 .client-logo {
-  height: 55px;
+  height: 100px;
   opacity: 0.85;
-  filter: grayscale(100%);
+  /* filter: grayscale(100%); */
   transition: 0.3s ease;
 }
 
