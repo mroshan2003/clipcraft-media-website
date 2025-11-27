@@ -449,28 +449,6 @@ function Contact() {
             <li>📱 WhatsApp: +91-98765-43210</li>
           </ul>
         </div>
-
-        <form className="card contact-form" onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label>Name</label>
-            <input placeholder="Your name" required />
-          </div>
-          <div className="form-group">
-            <label>Email / Phone</label>
-            <input placeholder="How can we reach you?" required />
-          </div>
-          <div className="form-group">
-            <label>Business / Brand</label>
-            <input placeholder="Brand / company name" />
-          </div>
-          <div className="form-group">
-            <label>What do you need help with?</label>
-            <textarea rows="3" placeholder="Podcast, reels, ads, full package…" />
-          </div>
-          <button type="submit" className="btn btn-primary btn-full">
-            Submit
-          </button>
-        </form>
       </div>
     </section>
   );
@@ -540,19 +518,8 @@ export default function App() {
         target="_blank"
         rel="noreferrer"
       >
-        <img src="/whatsapp.svg" alt="WhatsApp" className="whatsapp-icon" />
+        <img src="/WhatsApp.svg.webp" alt="WhatsApp" className="whatsapp-icon" />
       </a>
-
-      {/* Floating Call icon */}
-      <a href="tel:+919876543210" className="call-float">
-        📞
-      </a>
-
-      {/* Mobile bottom bar */}
-      <div className="mobile-bar">
-        <a href="tel:+919876543210">📞 Call</a>
-        <a href="https://wa.me/919876543210">💬 WhatsApp</a>
-      </div>
     </>
   );
 }
