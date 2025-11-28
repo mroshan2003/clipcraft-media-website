@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { revealOnScroll } from "./animations";
 import "./index.css";
+import AdminLogin from "./admin/AdminLogin";
+import AdminDashboard from "./admin/AdminDashboard";
+import PortfolioDashboard from "./admin/PortfolioDashboard";
+
 
 /* ================= NAVBAR ================== */
 
@@ -113,7 +117,13 @@ function Hero() {
 /* ========= ENHANCED PORTFOLIO CLIENTS ========= */
 
 function MarqueeClients() {
-  const logos = ["c1.png", "c2.png", "c3.png", "c4.png", "c5.png"];
+  const [clients, setClients] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/clients")
+      .then(res => res.json())
+      .then(data => setClients(data));
+  }, []);
 
   return (
     <section className="clients-section reveal">
@@ -122,11 +132,11 @@ function MarqueeClients() {
 
         <div className="clients-marquee">
           <div className="marquee-track-clients">
-            {logos.concat(logos).map((logo, i) => (
+            {clients.concat(clients).map((client, i) => (
               <div className="client-logo-box" key={i}>
                 <img
-                  src={`/clients/${logo}`}
-                  alt="Client Logo"
+                  src={client.imageUrl}
+                  alt={client.name}
                   className="client-logo"
                 />
               </div>
@@ -137,6 +147,7 @@ function MarqueeClients() {
     </section>
   );
 }
+
 
 /* ================= REVIEWS ================== */
 
@@ -331,36 +342,54 @@ function Pricing() {
 /* ================= PORTFOLIO ================== */
 
 function Portfolio() {
-  const items = [
-    { title: "Business Podcast Series", type: "Podcast • YouTube", img: "p1.jpg" },
-    { title: "Fashion Brand Reels", type: "Reels • Shorts", img: "p2.jpg" },
-    { title: "Restaurant Launch Film", type: "Brand Film", img: "p3.jpg" },
-    { title: "Doctor Personal Brand", type: "Reels • Carousels", img: "p4.jpg" },
-    { title: "Salon Social Presence", type: "Content + Ads", img: "p5.jpg" },
-    { title: "Creator Content System", type: "Long + Short form", img: "p6.jpg" },
-  ];
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    fetch("https://clipcraft-backend-oka9.onrender.com/api/portfolio")
+      .then((res) => res.json())
+      .then((data) => setItems(data));
+  }, []);
 
   return (
-    <section className="section section-dark reveal" id="portfolio">
+    <section className="section section-dark" id="portfolio">
       <div className="container">
         <h2 className="section-title">Portfolio</h2>
-        <div className="grid grid-3">
-          {items.map((item, i) => (
-            <div className="card portfolio-card" key={i}>
-              <img
-                src={`/portfolio/${item.img}`}
-                alt={item.title}
-                className="portfolio-thumb"
-              />
-              <h3>{item.title}</h3>
-              <p>{item.type}</p>
-            </div>
-          ))}
+
+        <div className="portfolio-scroll-wrapper">
+          <div className="portfolio-scroll">
+            {items.map((item) => (
+              <div className="portfolio-item" key={item._id}>
+                <video
+                  src={item.imageUrl}
+                  muted
+                  playsInline
+                  loop
+                  onMouseEnter={(e) => e.target.play()}
+                  onMouseLeave={(e) => e.target.pause()}
+                ></video>
+              </div>
+            ))}
+
+            {/* Duplicate for infinite loop */}
+            {items.map((item) => (
+              <div className="portfolio-item" key={item._id + "-clone"}>
+                <video
+                  src={item.imageUrl}
+                  muted
+                  playsInline
+                  loop
+                  onMouseEnter={(e) => e.target.play()}
+                  onMouseLeave={(e) => e.target.pause()}
+                ></video>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
   );
 }
+
 
 /* ================= BLOG / CASE STUDIES ================== */
 
@@ -496,6 +525,24 @@ export default function App() {
     return () => window.removeEventListener("scroll", revealOnScroll);
   }, []);
 
+  const [adminKey, setAdminKey] = useState(null);
+
+if (window.location.pathname === "/admin/clients") {
+  return adminKey
+    ? <AdminDashboard adminKey={adminKey} />
+    : <AdminLogin onLogin={(key) => setAdminKey(key)} />;
+}
+
+if (window.location.pathname === "/admin/portfolio") {
+  return adminKey ? (
+    <PortfolioDashboard adminKey={adminKey} />
+  ) : (
+    <AdminLogin onLogin={setAdminKey} />
+  );
+}
+
+
+
   return (
     <>
       <Navbar />
@@ -514,7 +561,7 @@ export default function App() {
 
       {/* Floating WhatsApp icon */}
       <a
-        href="https://wa.me/919876543210"
+        href="https://wa.me/8778223527"
         className="whatsapp-float"
         target="_blank"
         rel="noreferrer"

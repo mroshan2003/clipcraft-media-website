@@ -844,3 +844,43 @@ html {
     bottom: 25px;
   }
 }
+
+/* Outer wrapper */
+.portfolio-scroll-wrapper {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: 10px 0;
+}
+
+/* Scrolling track */
+.portfolio-scroll {
+  display: flex;
+  gap: 20px;
+  animation: scrollLeft 28s linear infinite;
+}
+
+/* Each item */
+.portfolio-item video {
+  width: 180px;
+  height: 320px;       /* Portrait size */
+  border-radius: 14px;
+  object-fit: cover;
+  background: black;
+  transition: transform 0.3s ease;
+}
+
+/* Hover zoom */
+.portfolio-item video:hover {
+  transform: scale(1.05);
+}
+
+/* Infinite scroll keyframes */
+@keyframes scrollLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}

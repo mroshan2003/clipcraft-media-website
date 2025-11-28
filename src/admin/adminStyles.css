@@ -1,0 +1,168 @@
+/* Global font (optional override) */
+body {
+  font-family: "Inter", sans-serif;
+}
+
+/* Page wrappers */
+.admin-login-container,
+.admin-dashboard-container {
+  min-height: 100vh;
+  background: #050509;
+  color: white;
+  padding: 40px 20px;
+}
+
+/* Centered login card */
+.admin-login-card {
+  width: 360px;
+  max-width: 90%;
+  margin: 120px auto;
+  background: #0b0b10;
+  padding: 40px 30px;
+  border-radius: 18px;
+  box-shadow: 0 0 30px rgba(249, 115, 22, 0.35);
+  text-align: center;
+}
+
+.admin-login-card h1 {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+}
+
+.admin-login-card input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+  border-radius: 10px;
+  border: 1px solid #27272f;
+  background: #15151f;
+  color: white;
+  outline: none;
+}
+
+.admin-login-card input:focus {
+  border-color: #f97316;
+}
+
+.admin-login-card button {
+  margin-top: 25px;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #f97316, #fb923c);
+  color: #111827;
+  font-weight: 600;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* Dashboard */
+
+.admin-dashboard-container h1 {
+  font-size: 1.7rem;
+  margin-bottom: 20px;
+}
+
+/* Upload card */
+
+.admin-upload-card {
+  background: #0b0b10;
+  padding: 22px 20px;
+  border-radius: 18px;
+  margin-bottom: 30px;
+  max-width: 420px;
+  box-shadow: 0 0 24px rgba(249, 115, 22, 0.25);
+}
+
+.admin-upload-card h2 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.admin-upload-card input[type="text"],
+.admin-upload-card input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 10px;
+  border: 1px solid #27272f;
+  background: #15151f;
+  color: white;
+  font-size: 0.9rem;
+}
+
+.admin-upload-card button {
+  margin-top: 16px;
+  padding: 10px 18px;
+  background: linear-gradient(135deg, #f97316, #fb923c);
+  color: #111827;
+  font-weight: 600;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.preview-img {
+  width: 110px;
+  height: 110px;
+  object-fit: contain;
+  background: #020617;
+  border-radius: 12px;
+  margin-top: 14px;
+}
+
+/* Client grid */
+
+.client-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 18px;
+  margin-top: 10px;
+}
+
+.client-card {
+  background: #0b0b10;
+  padding: 16px 14px;
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 0 0 18px rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.client-card img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  margin-bottom: 8px;
+  background: #020617;
+  border-radius: 10px;
+}
+
+.client-card p {
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+
+.client-card button {
+  padding: 6px 12px;
+  background: #ef4444;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+/* Responsive tweak */
+
+@media (max-width: 600px) {
+  .admin-dashboard-container {
+    padding: 25px 15px;
+  }
+
+  .admin-upload-card {
+    max-width: 100%;
+  }
+}
+
