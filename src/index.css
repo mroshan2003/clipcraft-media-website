@@ -31,6 +31,18 @@ body {
   font-family: "Inter", sans-serif !important;
 }
 
+@media (min-width: 1024px) {
+  body {
+    transform: scale(1.5);
+    transform-origin: top left;
+  }
+
+  html, body {
+    width: 66.666%;
+    overflow-x: hidden;
+  }
+}
+
 /* Layout helpers */
 
 .container {
