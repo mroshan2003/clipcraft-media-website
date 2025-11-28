@@ -561,7 +561,7 @@ if (window.location.pathname === "/admin/portfolio") {
 
       {/* Floating WhatsApp icon */}
       <a
-        href="https://wa.me/8778223527"
+        href="https://wa.me/918778223527"
         className="whatsapp-float"
         target="_blank"
         rel="noreferrer"
