@@ -120,9 +120,9 @@ function MarqueeClients() {
   const [clients, setClients] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/clients")
-      .then(res => res.json())
-      .then(data => setClients(data));
+    fetch("https://clipcraft-backend-oka9.onrender.com/api/clients")
+      .then((res) => res.json())
+      .then((data) => setClients(data));
   }, []);
 
   return (
@@ -132,7 +132,7 @@ function MarqueeClients() {
 
         <div className="clients-marquee">
           <div className="marquee-track-clients">
-            {clients.concat(clients).map((client, i) => (
+            {[...clients, ...clients].map((client, i) => (
               <div className="client-logo-box" key={i}>
                 <img
                   src={client.imageUrl}
@@ -350,12 +350,35 @@ function Portfolio() {
       .then((data) => setItems(data));
   }, []);
 
+  // Touch drag scrolling for mobile
+  const handleTouchScroll = (e) => {
+    const container = e.currentTarget;
+    const touch = e.touches[0];
+
+    if (!container.startX) {
+      container.startX = touch.clientX;
+      container.scrollLeftStart = container.scrollLeft;
+    }
+
+    const delta = touch.clientX - container.startX;
+    container.scrollLeft = container.scrollLeftStart - delta;
+  };
+
+  const resetTouchVars = (e) => {
+    e.currentTarget.startX = null;
+  };
+
   return (
     <section className="section section-dark" id="portfolio">
       <div className="container">
         <h2 className="section-title">Portfolio</h2>
 
-        <div className="portfolio-scroll-wrapper">
+        {/* ONE SINGLE scrolling row */}
+        <div
+          className="portfolio-scroll-wrapper"
+          onTouchMove={handleTouchScroll}
+          onTouchEnd={resetTouchVars}
+        >
           <div className="portfolio-scroll">
             {items.map((item) => (
               <div className="portfolio-item" key={item._id}>
@@ -389,6 +412,7 @@ function Portfolio() {
     </section>
   );
 }
+
 
 
 /* ================= BLOG / CASE STUDIES ================== */
