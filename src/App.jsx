@@ -5,7 +5,6 @@ import AdminLogin from "./admin/AdminLogin";
 import AdminDashboard from "./admin/AdminDashboard";
 import PortfolioDashboard from "./admin/PortfolioDashboard";
 
-
 /* ================= NAVBAR ================== */
 
 function Navbar() {
@@ -23,8 +22,9 @@ function Navbar() {
     <>
       <header className="nav">
         <div className="container nav-inner">
-
-          <div className="logo">Clipcraft Media</div>
+          <div>
+            <img className="logo" src="logo.png" alt="" />
+          </div>
 
           <nav className="nav-links">
             <a href="#about">About</a>
@@ -147,7 +147,6 @@ function MarqueeClients() {
     </section>
   );
 }
-
 
 /* ================= REVIEWS ================== */
 
@@ -373,7 +372,7 @@ function Portfolio() {
       <div className="container">
         <h2 className="section-title">Portfolio</h2>
 
-        {/* ONE SINGLE scrolling row */}
+        {/* SCROLL WRAPPER */}
         <div
           className="portfolio-scroll-wrapper"
           onTouchMove={handleTouchScroll}
@@ -387,13 +386,20 @@ function Portfolio() {
                   muted
                   playsInline
                   loop
-                  onMouseEnter={(e) => e.target.play()}
-                  onMouseLeave={(e) => e.target.pause()}
+                  onMouseEnter={(e) => {
+                    e.target.muted = false; // 🔊 Unmute on hover
+                    e.target.play();
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.muted = true; // 🔇 Mute when hover ends
+                    e.target.pause();
+                    e.target.currentTime = 0;
+                  }}
                 ></video>
               </div>
             ))}
 
-            {/* Duplicate for infinite loop */}
+            {/* Duplicate for infinite animation */}
             {items.map((item) => (
               <div className="portfolio-item" key={item._id + "-clone"}>
                 <video
@@ -401,8 +407,15 @@ function Portfolio() {
                   muted
                   playsInline
                   loop
-                  onMouseEnter={(e) => e.target.play()}
-                  onMouseLeave={(e) => e.target.pause()}
+                  onMouseEnter={(e) => {
+                    e.target.muted = false;
+                    e.target.play();
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.muted = true;
+                    e.target.pause();
+                    e.target.currentTime = 0;
+                  }}
                 ></video>
               </div>
             ))}
@@ -412,8 +425,6 @@ function Portfolio() {
     </section>
   );
 }
-
-
 
 /* ================= BLOG / CASE STUDIES ================== */
 
@@ -524,11 +535,7 @@ function Footer() {
           <a href="#about">About</a>
           <a href="#pricing">Pricing</a>
           <a href="#contact">Contact</a>
-          <a
-            href="https://instagram.com"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a href="https://instagram.com" target="_blank" rel="noreferrer">
             Instagram
           </a>
         </div>
@@ -551,21 +558,21 @@ export default function App() {
 
   const [adminKey, setAdminKey] = useState(null);
 
-if (window.location.pathname === "/admin/clients") {
-  return adminKey
-    ? <AdminDashboard adminKey={adminKey} />
-    : <AdminLogin onLogin={(key) => setAdminKey(key)} />;
-}
+  if (window.location.pathname === "/admin/clients") {
+    return adminKey ? (
+      <AdminDashboard adminKey={adminKey} />
+    ) : (
+      <AdminLogin onLogin={(key) => setAdminKey(key)} />
+    );
+  }
 
-if (window.location.pathname === "/admin/portfolio") {
-  return adminKey ? (
-    <PortfolioDashboard adminKey={adminKey} />
-  ) : (
-    <AdminLogin onLogin={setAdminKey} />
-  );
-}
-
-
+  if (window.location.pathname === "/admin/portfolio") {
+    return adminKey ? (
+      <PortfolioDashboard adminKey={adminKey} />
+    ) : (
+      <AdminLogin onLogin={setAdminKey} />
+    );
+  }
 
   return (
     <>
@@ -590,7 +597,11 @@ if (window.location.pathname === "/admin/portfolio") {
         target="_blank"
         rel="noreferrer"
       >
-        <img src="/WhatsApp.svg.webp" alt="WhatsApp" className="whatsapp-icon" />
+        <img
+          src="/WhatsApp.svg.webp"
+          alt="WhatsApp"
+          className="whatsapp-icon"
+        />
       </a>
     </>
   );
