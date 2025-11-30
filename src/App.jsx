@@ -550,6 +550,67 @@ function Footer() {
 /* ================= APP ROOT ================== */
 
 export default function App() {
+
+  const [pos, setPos] = useState({ x: 0, y: 0 });
+  const [colorMode, setColorMode] = useState("dark");
+
+  useEffect(() => {
+    // track mouse
+    window.addEventListener("mousemove", (e) => {
+      setPos({ x: e.clientX, y: e.clientY });
+    });
+
+    // ripple click
+    window.addEventListener("click", (e) => {
+      const ripple = document.createElement("div");
+      ripple.className = "cursor-ripple";
+      ripple.style.left = `${e.clientX}px`;
+      ripple.style.top = `${e.clientY}px`;
+      document.body.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 400);
+    });
+
+    // detect section color
+    const sections = document.querySelectorAll("[data-section]");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setColorMode(entry.target.dataset.section);
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+
+    sections.forEach((s) => observer.observe(s));
+
+    return () => observer.disconnect();
+  }, []);
+
+  // MAGNETIC HOVER EFFECT
+  useEffect(() => {
+    const items = document.querySelectorAll(".magnetic-hover");
+
+    items.forEach((item) => {
+      item.addEventListener("mousemove", (e) => {
+        const rect = item.getBoundingClientRect();
+        const x = e.clientX - (rect.left + rect.width / 2);
+        const y = e.clientY - (rect.top + rect.height / 2);
+
+        item.style.setProperty("--tx", `${x * 0.2}px`);
+        item.style.setProperty("--ty", `${y * 0.2}px`);
+        item.classList.add("active");
+      });
+
+      item.addEventListener("mouseleave", () => {
+        item.style.setProperty("--tx", `0px`);
+        item.style.setProperty("--ty", `0px`);
+        item.classList.remove("active");
+      });
+    });
+  }, []);
+
   useEffect(() => {
     revealOnScroll();
     window.addEventListener("scroll", revealOnScroll);
@@ -576,6 +637,12 @@ export default function App() {
 
   return (
     <>
+      <div className={`section-${colorMode}`}>
+      <div
+        className="cursor-main"
+        style={{ left: pos.x, top: pos.y }}
+      />
+
       <Navbar />
       <Hero />
       <MarqueeClients />
@@ -589,6 +656,7 @@ export default function App() {
       <FAQ />
       <Contact />
       <Footer />
+      </div>
 
       {/* Floating WhatsApp icon */}
       <a

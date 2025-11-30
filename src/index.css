@@ -4,6 +4,61 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  cursor: none;
+}
+
+/* === MAIN DOT ONLY === */
+.cursor-main {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: white;
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference; /* cut-out effect */
+  transition: 
+    transform 0.15s ease-out,
+    background 0.3s ease-out;
+}
+
+/* === RIPPLE CLICK EFFECT === */
+.cursor-ripple {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  background: white;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99990;
+  transform: translate(-50%, -50%);
+  animation: ripple 0.4s ease-out forwards;
+}
+
+@keyframes ripple {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(10); opacity: 0; }
+}
+
+/* === MAGNETIC HOVER === */
+.magnetic-hover {
+  display: inline-block;
+  transition: transform 0.20s ease-out;
+  position: relative;
+}
+
+.magnetic-hover.active {
+  transform: translate(var(--tx), var(--ty));
+}
+
+/* === SECTION COLOR BASED CURSOR === */
+.section-dark .cursor-main {
+  background: white;
+}
+
+.section-light .cursor-main {
+  background: black;
 }
 
 :root {
