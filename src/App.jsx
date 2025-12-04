@@ -74,39 +74,36 @@ function Hero() {
     <section className="hero reveal">
       <div className="container hero-inner">
         <div className="hero-text">
-          <p className="badge">Digital Marketing • Production • Branding</p>
+          <p className="badge">
+            Video Editing • Digital Marketing • Personal Branding{" "}
+          </p>
           <h1>
-            We Create Content That <br />
-            <span className="highlight">Builds Brands</span>
+            Content That Sells <br />
+            <span className="highlight">Branding That Sticks</span>
           </h1>
           <p className="hero-sub">
-            Premium video production and social media content systems for
-            entrepreneurs, creators and businesses.
+            Clipcraft Media produces scroll-stopping videos, engaging reels, 
+            and complete social media systems for creators and businesses.
           </p>
 
           <div className="hero-actions">
-            <a href="#contact" className="btn btn-primary">
-              Book a Strategy Call
+            <a
+              href="https://wa.me/918778223527?text=I%20saw%20your%20works%2C%20can%20you%20share%20the%20package%20details%20%3F"
+              className="btn btn-primary"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              WhatsApp Us
             </a>
+
             <a href="#portfolio" className="btn btn-outline">
               View Portfolio
             </a>
           </div>
 
           <div className="hero-meta">
-            <span>1500+ videos produced</span>
-            <span>50M+ views generated</span>
-          </div>
-        </div>
-
-        <div className="hero-media">
-          <div className="hero-card">
-            <p className="hero-card-title">Podcast & Reels Package</p>
-            <p className="hero-card-text">
-              Record once a month — we turn it into full episodes, reels,
-              shorts, stories and carousels.
-            </p>
-            <p className="hero-card-tag">Done-for-you content system</p>
+            <span>50+ videos produced</span>
+            <span>10M+ views generated</span>
           </div>
         </div>
       </div>
@@ -153,19 +150,13 @@ function MarqueeClients() {
 function Reviews() {
   const reviews = [
     {
-      text: "Best team for B-rolls and podcast shoots. Super quick and professional.",
-      name: "Sakthivel P",
-      tag: "@sakthivel",
+      text: "Their video content and social media strategy helped us reach more clients in just 30 days than we did in the past six months. Professional team, smooth process, and incredible results.",
     },
     {
-      text: "Creative, reliable and on-time delivery. Our brand presence leveled up.",
-      name: "Vignesh (Hoodie Guy)",
-      tag: "@hoodieguy",
+      text: "They handled our monthly reels, edits, and all branding creatives. Every deliverable was high-quality and perfectly on-brand.",
     },
     {
-      text: "They made our business story clear and compelling on all platforms.",
-      name: "Habbada Fashions",
-      tag: "@habbada",
+      text: "Clipcraft Media created a clean, powerful video ad that performed way beyond expectations. Their understanding of storytelling is next level.",
     },
   ];
 
@@ -233,27 +224,28 @@ function TestimonialSlider() {
 function HowItWorks() {
   const steps = [
     {
-      title: "Record once a month",
-      desc: "We plan your content, schedule the shoot and capture 4–6 hours of footage.",
+      title: "Mohammed Yusuf M",
+      desc: "Founder of Clipcraft Media",
+      img: "Yusuf.jpg",
     },
     {
-      title: "Create long & short content",
-      desc: "We cut full videos, reels, shorts, carousels and thumbnails tailored to each platform.",
-    },
-    {
-      title: "Distribute everywhere",
-      desc: "You get a ready-to-post content calendar for YouTube, Instagram, Facebook & LinkedIn.",
+      title: "Mohamed Roshan Akthar M",
+      desc: "Co-Founder of Clipcraft Media",
+      img: "Roshan.png",
     },
   ];
 
   return (
     <section className="section section-dark reveal" id="about">
       <div className="container">
-        <h2 className="section-title">How It’s Done</h2>
-        <div className="grid grid-3">
+        <h2 className="section-title">About us</h2>
+
+        <div className="grid grid-2">
           {steps.map((s, i) => (
             <div className="card step-card" key={i}>
-              <p className="step-number">0{i + 1}</p>
+              {/* Rounded Photo */}
+              <img src={s.img} alt={s.title} className="step-img" />
+
               <h3>{s.title}</h3>
               <p>{s.desc}</p>
             </div>
@@ -271,16 +263,16 @@ function Stats() {
     <section className="section stats reveal">
       <div className="container grid grid-3">
         <div className="stat">
-          <h3>1500+</h3>
+          <h3>50+</h3>
           <p>Videos Produced</p>
         </div>
         <div className="stat">
-          <h3>50M+</h3>
+          <h3>10M+</h3>
           <p>Views Generated</p>
         </div>
         <div className="stat">
-          <h3>80+</h3>
-          <p>Brands Worked With</p>
+          <h3>10+</h3>
+          <p>Clients Worked With</p>
         </div>
       </div>
     </section>
@@ -508,10 +500,22 @@ function Contact() {
             Share your details and we’ll respond with ideas and a clear plan for
             your brand.
           </p>
+
           <ul className="contact-list">
-            <li>📍 Chennai, India (available worldwide)</li>
-            <li>📩 hello@clipcraftmedia.com</li>
-            <li>📱 WhatsApp: +91-98765-43210</li>
+            <li>
+              <i className="fa-solid fa-location-dot"></i>
+              <span>Ramanathapuram, Tamil Nadu</span>
+            </li>
+
+            <li>
+              <i className="fa-solid fa-envelope"></i>
+              <span>clipcraftmedia03@gmail.com</span>
+            </li>
+
+            <li>
+              <i className="fa-brands fa-whatsapp"></i>
+              <span>+91-8778223527</span>
+            </li>
           </ul>
         </div>
       </div>
@@ -550,7 +554,6 @@ function Footer() {
 /* ================= APP ROOT ================== */
 
 export default function App() {
-
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const [colorMode, setColorMode] = useState("dark");
 
@@ -638,24 +641,21 @@ export default function App() {
   return (
     <>
       <div className={`section-${colorMode}`}>
-      <div
-        className="cursor-main"
-        style={{ left: pos.x, top: pos.y }}
-      />
+        <div className="cursor-main" style={{ left: pos.x, top: pos.y }} />
 
-      <Navbar />
-      <Hero />
-      <MarqueeClients />
-      <Reviews />
-      <TestimonialSlider />
-      <HowItWorks />
-      <Stats />
-      <Pricing />
-      <Portfolio />
-      <BlogSection />
-      <FAQ />
-      <Contact />
-      <Footer />
+        <Navbar />
+        <Hero />
+        <MarqueeClients />
+        <Reviews />
+        <TestimonialSlider />
+        <HowItWorks />
+        <Stats />
+        <Pricing />
+        <Portfolio />
+        <BlogSection />
+        <FAQ />
+        <Contact />
+        <Footer />
       </div>
 
       {/* Floating WhatsApp icon */}
