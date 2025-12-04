@@ -8,8 +8,21 @@
 }
 
 html {
-  font-size: 24px; /* 16 → 24 = 150% */
+  font-size: 22px;
 }
+
+@media (max-width: 768px) {
+  html {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 16px;
+  }
+}
+
 
 /* === MAIN DOT ONLY === */
 .cursor-main {
@@ -64,6 +77,19 @@ html {
 .section-light .cursor-main {
   background: black;
 }
+
+/* Hide custom cursor on mobile */
+@media (max-width: 768px) {
+  .cursor-main,
+  .cursor-ripple {
+    display: none !important;
+  }
+
+  * {
+    cursor: auto !important; /* restore normal mobile cursor */
+  }
+}
+
 
 :root {
   --bg: #050509;
