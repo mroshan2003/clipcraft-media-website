@@ -517,7 +517,7 @@ body {
 
 @media (max-width: 768px) {
   .marquee-track-clients {
-    animation-duration: 6s; /* mobile slightly faster */
+    animation-duration: 10s; /* mobile slightly faster */
   }
 }
 
