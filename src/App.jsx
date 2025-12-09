@@ -27,6 +27,9 @@ function Navbar() {
           </div>
 
           <nav className="nav-links">
+            <a href="#home">Home</a>
+            <a href="#brands">Brands</a>
+            <a href="#reviews">Reviews</a>
             <a href="#about">About</a>
             <a href="#pricing">Pricing</a>
             <a href="#portfolio">Portfolio</a>
@@ -47,6 +50,15 @@ function Navbar() {
         <button className="close-btn" onClick={closeMenu}>
           ×
         </button>
+        <a href="#home" onClick={closeMenu}>
+          Home
+        </a>
+        <a href="#brands" onClick={closeMenu}>
+          Brands
+        </a>
+        <a href="#reviews" onClick={closeMenu}>
+          Reviews
+        </a>
         <a href="#about" onClick={closeMenu}>
           About
         </a>
@@ -67,11 +79,11 @@ function Navbar() {
   );
 }
 
-/* ================= HERO ================== */
+/* ================= Home ================== */
 
-function Hero() {
+function Home() {
   return (
-    <section className="hero reveal">
+    <section className="hero reveal" id="home">
       <div className="container hero-inner">
         <div className="hero-text">
           <p className="badge">
@@ -82,8 +94,8 @@ function Hero() {
             <span className="highlight">Branding That Sticks</span>
           </h1>
           <p className="hero-sub">
-            Clipcraft Media produces scroll-stopping videos, engaging reels, 
-            and complete social media systems for creators and businesses.
+            Clipcraft Media produces scroll-stopping videos, engaging reels, and
+            complete social media systems for creators and businesses.
           </p>
 
           <div className="hero-actions">
@@ -123,7 +135,7 @@ function MarqueeClients() {
   }, []);
 
   return (
-    <section className="clients-section reveal">
+    <section className="clients-section reveal" id="brands">
       <div className="container">
         <p className="section-label">Trusted by Brands & Creators</p>
 
@@ -178,60 +190,21 @@ function Reviews() {
   );
 }
 
-/* ========= TESTIMONIAL SLIDER ========= */
+/* ================= About Us ================== */
 
-function TestimonialSlider() {
-  const slides = [
-    {
-      text: "Clipcraft Media transformed our brand presence with consistent, high-quality content.",
-      name: "Rahul — Entrepreneur",
-    },
-    {
-      text: "Hands down the best content team for businesses looking to scale online.",
-      name: "Aisha — Founder",
-    },
-    {
-      text: "Their monthly content system saved us hours and boosted engagement massively.",
-      name: "Arun — Fitness Coach",
-    },
-  ];
-
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(
-      () => setIndex((prev) => (prev + 1) % slides.length),
-      3500
-    );
-    return () => clearInterval(timer);
-  }, [slides.length]);
-
-  return (
-    <section className="section reveal">
-      <div className="container slider-wrapper">
-        <h2 className="section-title">What Clients Say</h2>
-        <div className="slider-card">
-          <p className="slider-text">“{slides[index].text}”</p>
-          <p className="slider-name">— {slides[index].name}</p>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ================= HOW IT WORKS ================== */
-
-function HowItWorks() {
+function AboutUs() {
   const steps = [
     {
       title: "Mohammed Yusuf M",
-      desc: "Founder of Clipcraft Media",
+      desc: "Founder of Clipcraft Media | Editor",
       img: "Yusuf.jpg",
+      link: "https://www.instagram.com/clipcraftor03?igsh=N3NpdnUyeXo3amZk",
     },
     {
       title: "Mohamed Roshan Akthar M",
       desc: "Co-Founder of Clipcraft Media",
       img: "Roshan.png",
+      link: "https://www.instagram.com/itz_me._.rxsxhxn._?igsh=MXBldGFqa3AxcjFiZQ==",
     },
   ];
 
@@ -242,10 +215,12 @@ function HowItWorks() {
 
         <div className="grid grid-2">
           {steps.map((s, i) => (
-            <div className="card step-card" key={i}>
-              {/* Rounded Photo */}
+            <div
+              className="card step-card founder-card"
+              key={i}
+              onClick={() => window.open(s.link, "_blank")}
+            >
               <img src={s.img} alt={s.title} className="step-img" />
-
               <h3>{s.title}</h3>
               <p>{s.desc}</p>
             </div>
@@ -293,36 +268,73 @@ function Pricing() {
 
         <div className="grid grid-3">
           <div className="card pricing-card">
-            <p className="pricing-tag">Starter</p>
-            <h3>₹25,000 / month</h3>
+            <h3>STANDARD VIDEO PACK</h3>
             <ul>
-              <li>1 shoot day / month</li>
-              <li>4 full videos</li>
-              <li>12 reels / shorts</li>
-              <li>Basic thumbnails</li>
+              <li>8 Reels</li>
+              <li>Ideal for regular content needs</li>
             </ul>
+            <button
+              className="pricing-btn"
+              onClick={() => {
+                const pkg = "STANDARD VIDEO PACK";
+                const msg = `Hi, I want more details about "${pkg}"`;
+                const phone = "8778223527";
+
+                window.open(
+                  `https://wa.me/91${phone}?text=${encodeURIComponent(msg)}`,
+                  "_blank"
+                );
+              }}
+            >
+              More Details
+            </button>
           </div>
 
           <div className="card pricing-card pricing-card-featured">
-            <p className="pricing-tag">Growth</p>
-            <h3>₹45,000 / month</h3>
+            <h3>CONTENT PACK</h3>
             <ul>
-              <li>2 shoot days / month</li>
-              <li>8 full videos</li>
-              <li>24 reels / shorts</li>
-              <li>Custom hooks & thumbnails</li>
+              <li>10 videos</li>
+              <li>3 posters</li>
+              <li>Perfect mix of video + visual content</li>
             </ul>
+            <button
+              className="pricing-btn"
+              onClick={() => {
+                const pkg = "CONTENT PACK";
+                const msg = `Hi, I want more details about "${pkg}"`;
+                const phone = "8778223527";
+
+                window.open(
+                  `https://wa.me/91${phone}?text=${encodeURIComponent(msg)}`,
+                  "_blank"
+                );
+              }}
+            >
+              More Details
+            </button>
           </div>
 
           <div className="card pricing-card">
-            <p className="pricing-tag">Custom</p>
-            <h3>On Request</h3>
+            <h3>BULK VIDEO PACK</h3>
             <ul>
-              <li>Podcast + events + ads</li>
-              <li>Strategy & consulting</li>
-              <li>Paid ad creatives</li>
-              <li>Full-funnel content plan</li>
+              <li>15 videos</li>
+              <li>Great for high-volume content creation</li>
             </ul>
+            <button
+              className="pricing-btn"
+              onClick={() => {
+                const pkg = "BULK VIDEO PACK";
+                const msg = `Hi, I want more details about "${pkg}"`;
+                const phone = "8778223527";
+
+                window.open(
+                  `https://wa.me/91${phone}?text=${encodeURIComponent(msg)}`,
+                  "_blank"
+                );
+              }}
+            >
+              More Details
+            </button>
           </div>
         </div>
       </div>
@@ -418,51 +430,29 @@ function Portfolio() {
   );
 }
 
-/* ================= BLOG / CASE STUDIES ================== */
-
-function BlogSection() {
-  const posts = [
-    { title: "How Brands Grow with Content", date: "Jan 2025" },
-    { title: "Building an Organic Content Engine", date: "Dec 2024" },
-    { title: "5 Reels That Actually Drive Sales", date: "Nov 2024" },
-  ];
-
-  return (
-    <section className="section reveal">
-      <div className="container">
-        <h2 className="section-title">Case Studies & Insights</h2>
-        <div className="grid grid-3">
-          {posts.map((p, i) => (
-            <div className="card blog-card" key={i}>
-              <h3>{p.title}</h3>
-              <p className="blog-date">{p.date}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 /* ================= FAQ ================== */
 
 function FAQ() {
   const faqs = [
     {
-      q: "Do you work with individual creators?",
-      a: "Yes. We work with creators, coaches, entrepreneurs and brands.",
+      q: "Do you work with individual creators or only brands?",
+      a: "We work with everyone — creators, coaches, startups and established brands. If you want to grow with content, we can help.",
     },
     {
-      q: "Do you handle end-to-end production?",
-      a: "Yes. From planning and scripting to shooting, editing and delivery.",
+      q: "Do you handle the entire video production process?",
+      a: "Yes. We take care of everything end-to-end — strategy, scripting, shoot planning, production, editing and final delivery.",
     },
     {
-      q: "How long to launch my content system?",
-      a: "Typically 1–2 weeks to plan and schedule your first shoot.",
+      q: "How soon can we start seeing content going live?",
+      a: "Once we finalise your package and strategy, it usually takes about 1–2 weeks to plan your first shoot and start rolling out content.",
     },
     {
-      q: "Do you offer monthly retainers?",
-      a: "Yes, our retainers are built to give you a predictable content engine.",
+      q: "Do you offer monthly content retainers?",
+      a: "Yes. Our monthly retainers are designed to give you a consistent, predictable flow of content without you worrying about the process.",
+    },
+    {
+      q: "Can the packages be customised for my brand’s needs?",
+      a: "Absolutely. Shoot days, number of videos, reels and design assets can be customised based on your goals and budget.",
     },
   ];
 
@@ -486,11 +476,6 @@ function FAQ() {
 /* ================= CONTACT ================== */
 
 function Contact() {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert("Form submitted! Connect this to email/WhatsApp later.");
-  };
-
   return (
     <section className="section section-dark reveal" id="contact">
       <div className="container contact-grid">
@@ -501,20 +486,61 @@ function Contact() {
             your brand.
           </p>
 
-          <ul className="contact-list">
-            <li>
-              <i className="fa-solid fa-location-dot"></i>
-              <span>Ramanathapuram, Tamil Nadu</span>
+          <ul className="contact-list upgraded-contact">
+            {/* Location */}
+            <li className="contact-card">
+              <a
+                href="https://www.google.com/maps/search/Ramanathapuram,+Tamil+Nadu"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div className="icon-box">
+                  <i className="fa-solid fa-location-dot"></i>
+                </div>
+                <span>Ramanathapuram, Tamil Nadu</span>
+              </a>
             </li>
 
-            <li>
-              <i className="fa-solid fa-envelope"></i>
-              <span>clipcraftmedia03@gmail.com</span>
+            {/* Email */}
+            <li className="contact-card">
+              <a
+                href="mailto:clipcraftmedia03@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div className="icon-box">
+                  <i className="fa-solid fa-envelope"></i>
+                </div>
+                <span>clipcraftmedia03@gmail.com</span>
+              </a>
             </li>
 
-            <li>
-              <i className="fa-brands fa-whatsapp"></i>
-              <span>+91-8778223527</span>
+            {/* WhatsApp */}
+            <li className="contact-card">
+              <a
+                href="https://wa.me/918778223527?text=Hi%2C%20I%20want%20more%20details."
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div className="icon-box">
+                  <i className="fa-brands fa-whatsapp"></i>
+                </div>
+                <span>+91-8778223527</span>
+              </a>
+            </li>
+
+            {/* Instagram */}
+            <li className="contact-card">
+              <a
+                href="https://www.instagram.com/clipcraftmedia.03?igsh=MXJjNXEwY24xMGE2Mg=="
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div className="icon-box">
+                  <i className="fa-brands fa-instagram"></i>
+                </div>
+                <span>clipcraftmedia.03</span>
+              </a>
             </li>
           </ul>
         </div>
@@ -536,12 +562,14 @@ function Footer() {
           </p>
         </div>
         <div className="footer-links">
+          <a href="#home">Home</a>
+          <a href="#brands">Brands</a>
+          <a href="#reviews">Reviews</a>
           <a href="#about">About</a>
           <a href="#pricing">Pricing</a>
+          <a href="#portfolio">Portfolio</a>
+          <a href="#faq">FAQ</a>
           <a href="#contact">Contact</a>
-          <a href="https://instagram.com" target="_blank" rel="noreferrer">
-            Instagram
-          </a>
         </div>
         <p className="footer-copy">
           © {new Date().getFullYear()} Clipcraft Media. All rights reserved.
@@ -644,15 +672,13 @@ export default function App() {
         <div className="cursor-main" style={{ left: pos.x, top: pos.y }} />
 
         <Navbar />
-        <Hero />
+        <Home />
         <MarqueeClients />
         <Reviews />
-        <TestimonialSlider />
-        <HowItWorks />
+        <AboutUs />
         <Stats />
         <Pricing />
         <Portfolio />
-        <BlogSection />
         <FAQ />
         <Contact />
         <Footer />
@@ -660,7 +686,7 @@ export default function App() {
 
       {/* Floating WhatsApp icon */}
       <a
-        href="https://wa.me/918778223527"
+        href="https://wa.me/918778223527?text=I%20saw%20your%20works%2C%20can%20you%20share%20the%20package%20details%20%3F"
         className="whatsapp-float"
         target="_blank"
         rel="noreferrer"

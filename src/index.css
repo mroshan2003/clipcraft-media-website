@@ -23,7 +23,6 @@ html {
   }
 }
 
-
 /* === MAIN DOT ONLY === */
 .cursor-main {
   width: 14px;
@@ -35,9 +34,7 @@ html {
   z-index: 99999;
   transform: translate(-50%, -50%);
   mix-blend-mode: difference; /* cut-out effect */
-  transition: 
-    transform 0.15s ease-out,
-    background 0.3s ease-out;
+  transition: transform 0.15s ease-out, background 0.3s ease-out;
 }
 
 /* === RIPPLE CLICK EFFECT === */
@@ -54,14 +51,20 @@ html {
 }
 
 @keyframes ripple {
-  0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-  100% { transform: translate(-50%, -50%) scale(10); opacity: 0; }
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(10);
+    opacity: 0;
+  }
 }
 
 /* === MAGNETIC HOVER === */
 .magnetic-hover {
   display: inline-block;
-  transition: transform 0.20s ease-out;
+  transition: transform 0.2s ease-out;
   position: relative;
 }
 
@@ -90,7 +93,6 @@ html {
   }
 }
 
-
 :root {
   --bg: #050509;
   --bg-alt: #0a0a11;
@@ -115,7 +117,6 @@ body {
   min-height: 100vh;
   font-family: "Inter", sans-serif !important;
 }
-
 
 /* Layout helpers */
 
@@ -190,9 +191,9 @@ body {
   height: 250%;
   background: linear-gradient(
     120deg,
-    rgba(255, 255, 255, 0.0) 0%,
+    rgba(255, 255, 255, 0) 0%,
     rgba(255, 255, 255, 0.1) 50%,
-    rgba(255, 255, 255, 0.0) 100%
+    rgba(255, 255, 255, 0) 100%
   );
   transform: rotate(-25deg);
   transition: 0.6s;
@@ -219,15 +220,18 @@ body {
 
 /* Glow ring */
 .step-img:hover {
-  box-shadow: 0 0 25px 5px #f97316,
-              0 0 40px 10px #e2ba9d;
+  box-shadow: 0 0 25px 5px #f97316, 0 0 40px 10px #e2ba9d;
   transform: scale(1.08);
 }
 
 /* Floating animation */
 @keyframes float {
-  0% { transform: translateY(0px); }
-  100% { transform: translateY(-10px); }
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-10px);
+  }
 }
 
 /* Mobile */
@@ -236,7 +240,6 @@ body {
     grid-template-columns: 1fr;
   }
 }
-
 
 /* Navbar */
 
@@ -297,11 +300,8 @@ body {
   border: 1px solid transparent;
   cursor: pointer;
   text-decoration: none;
-  transition:
-    background var(--transition),
-    color var(--transition),
-    border var(--transition),
-    transform var(--transition),
+  transition: background var(--transition), color var(--transition),
+    border var(--transition), transform var(--transition),
     box-shadow var(--transition);
 }
 
@@ -325,7 +325,11 @@ body {
   left: -20%;
   width: 160%;
   height: 300%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.35), transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.35),
+    transparent 70%
+  );
   transform: rotate(25deg);
   opacity: 0;
   transition: opacity 0.4s;
@@ -493,8 +497,9 @@ body {
 }
 
 .marquee-track-clients {
-  display: flex;
-  animation: clientScroll 12s linear infinite;
+  display: inline-flex; /* IMPORTANT */
+  width: max-content; /* SUPER IMPORTANT */
+  animation: clientScroll 18s linear infinite;
 }
 
 .marquee-track-clients:hover {
@@ -502,10 +507,10 @@ body {
 }
 
 @keyframes clientScroll {
-  from {
+  0% {
     transform: translateX(0);
   }
-  to {
+  100% {
     transform: translateX(-50%);
   }
 }
@@ -515,7 +520,6 @@ body {
     animation-duration: 6s; /* mobile slightly faster */
   }
 }
-
 
 .client-logo-box {
   padding: 0 2.2rem;
@@ -532,7 +536,6 @@ body {
   transition: transform 0.3s ease;
 }
 
-
 .client-logo:hover {
   opacity: 1;
   filter: grayscale(0%);
@@ -546,9 +549,7 @@ body {
   border: 1px solid rgba(148, 163, 184, 0.25);
   background: rgba(15, 23, 42, 0.9);
   padding: 1.4rem 1.5rem;
-  transition:
-    transform 0.35s ease,
-    box-shadow 0.35s ease;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
 .card:hover {
@@ -643,6 +644,31 @@ body {
   background: radial-gradient(circle at top, var(--accent-soft) 0, #020617 70%);
 }
 
+.pricing-btn {
+  margin-top: 1.2rem;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+  padding: 12px 26px;
+  background: #ff6600;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+
+  transition: 0.3s ease;
+}
+
+.pricing-btn:hover {
+  background: #ff7f2a;
+  box-shadow: 0 0 12px rgba(255, 120, 0, 0.6);
+  transform: translateY(-2px);
+}
+
 /* Portfolio */
 
 .portfolio-card {
@@ -726,49 +752,99 @@ body {
   align-items: flex-start;
 }
 
-/* Contact List Layout */
-.contact-list {
+/* UPGRADED CONTACT LIST */
+.upgraded-contact {
   list-style: none;
   padding: 0;
-  margin-top: 20px;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-.contact-list li {
+/* Contact Card */
+.contact-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 14px 18px;
+  transition: 0.35s ease;
+  backdrop-filter: blur(10px);
+}
+
+.contact-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 132, 40, 0.7);
+  box-shadow: 0 0 20px rgba(255, 120, 0, 0.35);
+}
+
+/* Contact link wrapper */
+.contact-card a {
   display: flex;
   align-items: center;
-  margin-bottom: 14px;
-  font-size: 18px;
-  color: #e0e0e0;
-  cursor: pointer;
+  gap: 16px;
+  color: #f0f0f0;
+  text-decoration: none;
   transition: 0.3s ease;
+}
+
+/* ICON BOX */
+.icon-box {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: rgba(255, 132, 40, 0.15);
+  border: 1px solid rgba(255, 132, 40, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.35s ease;
 }
 
 /* Icon styles */
-.contact-list li i {
-  font-size: 22px;
-  margin-right: 12px; /* 🔥 space between icon & text */
-  color: #ff6600; /* 🔥 main theme orange */
-  transition: 0.3s ease;
+.icon-box i {
+  font-size: 20px;
+  color: #ff6600;
+  transition: 0.35s ease;
 }
 
-/* Hover glow */
-.contact-list li:hover i {
-  color: #ffa04d; /* lighter orange on hover */
-  text-shadow: 0 0 12px rgba(255, 120, 0, 0.7);
+/* Card hover → icon animation */
+.contact-card:hover .icon-box {
+  background: rgba(255, 132, 40, 0.25);
+  transform: scale(1.12);
+  box-shadow: 0 0 18px rgba(255, 130, 40, 0.55);
+}
+
+.contact-card:hover .icon-box i {
+  color: #ff9a4d;
   transform: scale(1.2);
 }
 
-/* Hover text effect */
-.contact-list li:hover span {
-  color: #ffcc9e;
+/* Text animation */
+.contact-card span {
+  font-size: 17px;
+  font-weight: 500;
+  transition: 0.35s ease;
+}
+
+.contact-card:hover span {
+  color: #ffb98a;
   transform: translateX(4px);
 }
 
-/* Optional — makes row hover smoother */
-.contact-list li span {
-  transition: 0.3s ease;
+/* MOBILE OPTIMIZATION */
+@media (max-width: 640px) {
+  .contact-card {
+    padding: 12px 15px;
+  }
+  .icon-box {
+    width: 40px;
+    height: 40px;
+  }
+  .contact-card span {
+    font-size: 15px;
+  }
 }
-
 
 /* Footer */
 
@@ -815,8 +891,6 @@ body {
   font-size: 0.78rem;
   color: var(--muted);
 }
-
-
 
 /* Reveal animations */
 
@@ -1055,7 +1129,6 @@ html {
   animation-play-state: paused;
 }
 
-
 /* Portrait video styling + glow */
 .portfolio-item video {
   width: 160px;
@@ -1077,8 +1150,12 @@ html {
 
 /* Infinite scroll animation (one row) */
 @keyframes scrollLeft {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 /* MOBILE: Faster scroll + smaller cards */
@@ -1155,7 +1232,6 @@ html {
     transform: scale(1);
   }
 }
-
 
 .speed-info {
   margin-top: 8px;
@@ -1286,7 +1362,6 @@ html {
   transform: translateY(-3px);
   box-shadow: 0 0 15px rgba(255, 140, 20, 0.22);
 }
-
 
 /* -------------------------
    MOBILE DESIGN OPTIMIZATION
