@@ -2,14 +2,17 @@ export default function Home() {
   return (
     <section className="hero reveal" id="home">
       <div className="container hero-inner">
+        {/* LEFT SIDE */}
         <div className="hero-text">
           <p className="badge">
             Video Editing • Digital Marketing • Personal Branding{" "}
           </p>
+
           <h1>
             Content That Sells <br />
             <span className="highlight">Branding That Sticks</span>
           </h1>
+
           <p className="hero-sub">
             Clipcraft Media produces scroll-stopping videos, engaging reels, and
             complete social media systems for creators and businesses.
@@ -34,6 +37,18 @@ export default function Home() {
             <span>50+ videos produced</span>
             <span>10M+ views generated</span>
           </div>
+        </div>
+
+        {/* RIGHT SIDE → HERO VIDEO */}
+        <div className="hero-video-box">
+          <video
+            src="https://res.cloudinary.com/de6jt21jd/video/upload/v1765397124/Logo_an_cr_1_lr3p9c.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="hero-video"
+          ></video>
         </div>
       </div>
     </section>

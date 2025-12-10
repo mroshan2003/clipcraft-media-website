@@ -40,18 +40,27 @@ export default function Portfolio() {
         >
           <div className="portfolio-scroll">
             {items.map((item) => (
-              <div className="portfolio-item" key={item._id}>
+              <div
+                className="portfolio-item"
+                key={item._id}
+                onMouseEnter={(e) => {
+                  e.currentTarget.classList.add("active-video");
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.classList.remove("active-video");
+                }}
+              >
                 <video
                   src={item.imageUrl}
                   muted
                   playsInline
                   loop
                   onMouseEnter={(e) => {
-                    e.target.muted = false; // 🔊 Unmute on hover
+                    e.target.muted = false;
                     e.target.play();
                   }}
                   onMouseLeave={(e) => {
-                    e.target.muted = true; // 🔇 Mute when hover ends
+                    e.target.muted = true;
                     e.target.pause();
                     e.target.currentTime = 0;
                   }}
@@ -61,7 +70,16 @@ export default function Portfolio() {
 
             {/* Duplicate for infinite animation */}
             {items.map((item) => (
-              <div className="portfolio-item" key={item._id + "-clone"}>
+              <div
+                className="portfolio-item"
+                key={item._id}
+                onMouseEnter={(e) => {
+                  e.currentTarget.classList.add("active-video");
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.classList.remove("active-video");
+                }}
+              >
                 <video
                   src={item.imageUrl}
                   muted
