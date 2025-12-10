@@ -23,3 +23,28 @@ html {
   }
 }
 
+:root {
+  --bg: #050509;
+  --bg-alt: #0a0a11;
+  --card: #11111c;
+  --accent: #f97316;
+  --accent-soft: rgba(249, 115, 22, 0.18);
+  --text: #f9fafb;
+  --muted: #9ca3af;
+  --border: #1f2933;
+  --radius-lg: 18px;
+  --radius-xl: 28px;
+  --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.55);
+  --max-width: 1620px;
+  --nav-height: 72px;
+  --transition: 0.25s ease;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+}
+
+body {
+  background: radial-gradient(circle at top, #111827 0, #020308 60%);
+  color: var(--text);
+  min-height: 100vh;
+  font-family: "Inter", sans-serif !important;
+}
+

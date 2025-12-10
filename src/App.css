@@ -1,4 +1,4 @@
-/* === MAIN DOT ONLY === */
+/* ------------------------- Dot Cursor Styles ------------------------- */
 .cursor-main {
   width: 14px;
   height: 14px;
@@ -12,7 +12,6 @@
   transition: transform 0.15s ease-out, background 0.3s ease-out;
 }
 
-/* === RIPPLE CLICK EFFECT === */
 .cursor-ripple {
   position: fixed;
   width: 6px;
@@ -36,7 +35,6 @@
   }
 }
 
-/* === MAGNETIC HOVER === */
 .magnetic-hover {
   display: inline-block;
   transition: transform 0.2s ease-out;
@@ -47,7 +45,6 @@
   transform: translate(var(--tx), var(--ty));
 }
 
-/* === SECTION COLOR BASED CURSOR === */
 .section-dark .cursor-main {
   background: white;
 }
@@ -56,44 +53,9 @@
   background: black;
 }
 
-/* Hide custom cursor on mobile */
-@media (max-width: 768px) {
-  .cursor-main,
-  .cursor-ripple {
-    display: none !important;
-  }
+/* -------------------------------------------------- */
 
-  * {
-    cursor: auto !important; /* restore normal mobile cursor */
-  }
-}
-
-:root {
-  --bg: #050509;
-  --bg-alt: #0a0a11;
-  --card: #11111c;
-  --accent: #f97316;
-  --accent-soft: rgba(249, 115, 22, 0.18);
-  --text: #f9fafb;
-  --muted: #9ca3af;
-  --border: #1f2933;
-  --radius-lg: 18px;
-  --radius-xl: 28px;
-  --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.55);
-  --max-width: 1620px;
-  --nav-height: 72px;
-  --transition: 0.25s ease;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
-}
-
-body {
-  background: radial-gradient(circle at top, #111827 0, #020308 60%);
-  color: var(--text);
-  min-height: 100vh;
-  font-family: "Inter", sans-serif !important;
-}
-
-/* Layout helpers */
+/* ------------------------- Layout helpers ------------------------- */
 
 .container {
   width: 100%;
@@ -130,7 +92,6 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
 }
 
-/* Grid */
 .grid-2 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -664,7 +625,7 @@ body {
   display: inline-flex; /* IMPORTANT for infinite scroll */
   width: max-content;
   gap: 28px; /* More spacing */
-  animation: scrollLeft 14s linear infinite;
+  animation: scrollLeft 20s linear infinite;
 }
 
 /* Pause when hovering */
@@ -674,8 +635,8 @@ body {
 
 /* 🚀 Bigger portrait videos for Desktop */
 .portfolio-item video {
-  width: 260px; /* 🔥 much bigger */
-  height: 460px; /* 🔥 tall reel style */
+  width: 230px; /* 🔥 much bigger */
+  height: 400px; /* 🔥 tall reel style */
   object-fit: cover;
   border-radius: 16px;
   background: #000;
@@ -1483,5 +1444,17 @@ html {
 
   .footer-links {
     justify-content: center;
+  }
+}
+
+/* Hide custom cursor on mobile */
+@media (max-width: 768px) {
+  .cursor-main,
+  .cursor-ripple {
+    display: none !important;
+  }
+
+  * {
+    cursor: auto !important; /* restore normal mobile cursor */
   }
 }

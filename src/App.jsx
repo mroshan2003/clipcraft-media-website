@@ -86,17 +86,29 @@ export default function App() {
 
   if (window.location.pathname === "/admin/clients") {
     return adminKey ? (
-      <AdminDashboard adminKey={adminKey} />
+      <div className={`section-${colorMode}`}>
+        <div className="cursor-main" style={{ left: pos.x, top: pos.y }} />
+        <AdminDashboard adminKey={adminKey} />
+      </div>
     ) : (
-      <AdminLogin onLogin={(key) => setAdminKey(key)} />
+      <div className={`section-${colorMode}`}>
+        <div className="cursor-main" style={{ left: pos.x, top: pos.y }} />
+        <AdminLogin onLogin={(key) => setAdminKey(key)} />
+      </div>
     );
   }
 
   if (window.location.pathname === "/admin/portfolio") {
     return adminKey ? (
-      <PortfolioDashboard adminKey={adminKey} />
+      <div className={`section-${colorMode}`}>
+        <div className="cursor-main" style={{ left: pos.x, top: pos.y }} />
+        <PortfolioDashboard adminKey={adminKey} />
+      </div>
     ) : (
-      <AdminLogin onLogin={setAdminKey} />
+      <div className={`section-${colorMode}`}>
+        <div className="cursor-main" style={{ left: pos.x, top: pos.y }} />
+        <AdminLogin onLogin={setAdminKey} />
+      </div>
     );
   }
 
