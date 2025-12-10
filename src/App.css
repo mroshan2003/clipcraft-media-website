@@ -664,7 +664,7 @@
 /* 📱 Mobile View — slightly smaller but still large */
 @media (max-width: 768px) {
   .portfolio-scroll {
-    animation-duration: 8s; /* faster */
+    animation-duration: 20s; /* faster */
     gap: 18px;
   }
 
