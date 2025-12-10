@@ -625,7 +625,7 @@
   display: inline-flex; /* IMPORTANT for infinite scroll */
   width: max-content;
   gap: 28px; /* More spacing */
-  animation: scrollLeft 20s linear infinite;
+  animation: scrollLeft 25s linear infinite;
 }
 
 /* Pause when hovering */
