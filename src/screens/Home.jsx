@@ -42,7 +42,7 @@ export default function Home() {
         {/* RIGHT SIDE → HERO VIDEO */}
         <div className="hero-video-box">
           <video
-            src="https://res.cloudinary.com/de6jt21jd/video/upload/v1765397124/Logo_an_cr_1_lr3p9c.mp4"
+            src="https://res.cloudinary.com/de6jt21jd/video/upload/v1765402848/Logo_an_cr_1__3_bhxngo.mp4"
             autoPlay
             loop
             muted

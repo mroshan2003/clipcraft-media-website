@@ -362,26 +362,20 @@
   color: var(--accent);
 }
 
-.hero-video-box {
+/* .hero-video-box {
   display: flex;
   justify-content: center;
   align-items: center;
-}
+} */
 
 .hero-video {
-  width: 100%;
-  max-width: 420px;
+  padding-right: 100px;
+  width: 200%;
+  max-width: 500px;
   height: auto;
-  border-radius: 22px;
-  object-fit: cover;
-  box-shadow: 0 0 30px rgba(255, 140, 20, 0.25);
-  transition: 0.3s ease;
+  opacity: 20%;
 }
 
-.hero-video:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 40px rgba(255, 140, 20, 0.45);
-}
 
 /* Mobile adjustments */
 @media (max-width: 768px) {
