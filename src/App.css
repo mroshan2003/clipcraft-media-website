@@ -453,7 +453,7 @@
 
 @media (max-width: 768px) {
   .marquee-track-clients {
-    animation-duration: 10s; /* mobile slightly faster */
+    animation-duration: 20s; /* mobile slightly faster */
   }
 }
 
@@ -664,7 +664,7 @@
 /* 📱 Mobile View — slightly smaller but still large */
 @media (max-width: 768px) {
   .portfolio-scroll {
-    animation-duration: 20s; /* faster */
+    animation-duration: 30s; /* faster */
     gap: 18px;
   }
 
