@@ -3,13 +3,14 @@ import React, { useState } from "react";
 export function AdminUpload({ adminKey, refresh }) {
   const [name, setName] = useState("");
   const [logo, setLogo] = useState(null);
+  const [link, setLink] = useState(null);
   const [preview, setPreview] = useState(null);
   const [progress, setProgress] = useState(0);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
   const upload = async () => {
-    if (!name || !logo) {
+    if (!name || !logo || !link) {
       alert("Please enter client name and select a logo");
       return;
     }
@@ -21,6 +22,7 @@ export function AdminUpload({ adminKey, refresh }) {
     const form = new FormData();
     form.append("name", name);
     form.append("logo", logo);
+    form.append("link", link);
 
     const xhr = new XMLHttpRequest();
     xhr.open(
@@ -46,6 +48,7 @@ export function AdminUpload({ adminKey, refresh }) {
 
         setName("");
         setLogo(null);
+        setLink(null);
         setPreview(null);
         setProgress(0);
 
@@ -67,6 +70,13 @@ export function AdminUpload({ adminKey, refresh }) {
         placeholder="Client name (ex: Nike, Habbada Fashions)"
         value={name}
         onChange={(e) => setName(e.target.value)}
+      />
+
+      <input
+        type="text"
+        placeholder="Client Link (Instagram / Website)"
+        value={link}
+        onChange={(e) => setLink(e.target.value)}
       />
 
       {/* ⭐ Styled Choose File Button */}

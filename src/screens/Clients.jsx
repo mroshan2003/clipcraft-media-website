@@ -18,11 +18,17 @@ export default function Clients() {
           <div className="marquee-track-clients">
             {[...clients, ...clients].map((client, i) => (
               <div className="client-logo-box" key={i}>
-                <img
-                  src={client.imageUrl}
-                  alt={client.name}
-                  className="client-logo"
-                />
+                <a
+                  href={client.link || "#"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src={client.imageUrl}
+                    alt={client.name}
+                    className="client-logo"
+                  />
+                </a>
               </div>
             ))}
           </div>

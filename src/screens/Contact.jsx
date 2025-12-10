@@ -55,7 +55,7 @@ export default function Contact() {
             {/* Instagram */}
             <li className="contact-card">
               <a
-                href="https://www.instagram.com/clipcraftmedia.03?igsh=MXJjNXEwY24xMGE2Mg=="
+                href="https://www.instagram.com/clipcraftor03/"
                 target="_blank"
                 rel="noopener noreferrer"
               >

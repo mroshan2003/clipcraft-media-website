@@ -59,6 +59,7 @@ export default function AdminDashboard({ adminKey }) {
         {clients.map((c) => (
           <div key={c._id} className="client-card enhanced-client-card">
             <img src={c.imageUrl} alt={c.name} className="client-logo-img" />
+
             <p className="client-name">{c.name}</p>
 
             <button
@@ -67,6 +68,18 @@ export default function AdminDashboard({ adminKey }) {
             >
               Delete
             </button>
+
+            {/* 🔗 LINK BUTTON (only if link exists) */}
+            {c.link && (
+              <a
+                href={c.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="insta-icon-btn"
+              >
+                <i className="fa-brands fa-instagram"></i>
+              </a>
+            )}
           </div>
         ))}
       </div>

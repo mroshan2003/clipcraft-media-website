@@ -194,7 +194,7 @@ body {
 .modal-bg {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.7);
+  background: rgba(0, 0, 0, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -240,6 +240,36 @@ body {
 
 .confirm-delete-btn:hover {
   background: #ff1100;
+}
+
+.insta-icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 42px;
+  height: 42px;
+
+  margin: 10px auto 8px;
+
+  background: rgba(255, 80, 150, 0.15);
+
+  border-radius: 10px;
+
+  color: #ff4fa0;
+  font-size: 22px;
+
+  cursor: pointer;
+  text-decoration: none;
+
+  transition: 0.3s ease;
+}
+
+.insta-icon-btn:hover {
+  background: rgba(255, 80, 150, 0.3);
+  transform: scale(1.12);
+  box-shadow: 0 0 18px rgba(255, 80, 150, 0.5);
+  color: #ff7fbd;
 }
 
 /* Styled file input */
@@ -371,6 +401,12 @@ body {
 }
 
 @keyframes pop {
-  0% { transform: scale(0.8); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }

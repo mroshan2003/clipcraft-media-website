@@ -2,15 +2,15 @@ export default function AboutUs() {
   const steps = [
     {
       title: "Mohammed Yusuf M",
-      desc: "Founder of Clipcraft Media | Editor",
+      desc: "Founder of Clipcraft Media | Video Editor",
       img: "Yusuf.jpg",
-      link: "https://www.instagram.com/clipcraftor03?igsh=N3NpdnUyeXo3amZk",
+      link: "https://www.instagram.com/clipcraftor03/",
     },
     {
       title: "Mohamed Roshan Akthar M",
       desc: "Co-Founder of Clipcraft Media",
       img: "Roshan.png",
-      link: "https://www.instagram.com/itz_me._.rxsxhxn._?igsh=MXBldGFqa3AxcjFiZQ==",
+      link: "https://www.instagram.com/itz_me._.rxsxhxn._/",
     },
   ];
 
