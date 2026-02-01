@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 export function PortfolioUpload({ adminKey, refresh }) {
-  const [title, setTitle] = useState("");
+  const [category, setCategory] = useState("");
   const [video, setVideo] = useState(null);
   const [preview, setPreview] = useState(null);
 
@@ -12,8 +12,8 @@ export function PortfolioUpload({ adminKey, refresh }) {
   const [success, setSuccess] = useState(false);
 
   const upload = async () => {
-    if (!title || !video) {
-      alert("Please enter a title and select a video");
+    if (!category || !video) {
+      alert("Please select a category and choose a video");
       return;
     }
 
@@ -24,7 +24,7 @@ export function PortfolioUpload({ adminKey, refresh }) {
     setSuccess(false);
 
     const form = new FormData();
-    form.append("title", title);
+    form.append("category", category);
     form.append("image", video);
 
     const xhr = new XMLHttpRequest();
@@ -62,14 +62,13 @@ export function PortfolioUpload({ adminKey, refresh }) {
 
     xhr.onload = () => {
       setLoading(false);
-
       const data = JSON.parse(xhr.responseText);
 
       if (xhr.status === 200 && data.item) {
         setSuccess(true);
         setTimeout(() => setSuccess(false), 2000);
 
-        setTitle("");
+        setCategory("");
         setVideo(null);
         setPreview(null);
         setProgress(0);
@@ -89,14 +88,18 @@ export function PortfolioUpload({ adminKey, refresh }) {
     <div className="admin-upload-card">
       <h2>Upload Portfolio Video</h2>
 
-      <input
-        type="text"
-        placeholder="Video Title (ex: Wedding Reel)"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
+      {/* CATEGORY SELECT */}
+      <select
+        className="category-select"
+        value={category}
+        onChange={(e) => setCategory(e.target.value)}
+      >
+        <option value="">Select Category</option>
+        <option value="shoot_edit">Shoot + Edit</option>
+        <option value="edit_only">Edit Only</option>
+      </select>
 
-      {/* ⭐ Styled File Button */}
+      {/* FILE INPUT */}
       <div className="file-input-wrapper">
         <label className="file-input-label">
           Choose Video
@@ -116,7 +119,6 @@ export function PortfolioUpload({ adminKey, refresh }) {
       {preview && (
         <video
           src={preview}
-          className="preview-img"
           muted
           playsInline
           controls

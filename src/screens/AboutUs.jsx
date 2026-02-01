@@ -39,7 +39,7 @@ export default function AboutUs() {
       <section className="section stats reveal">
         <div className="container grid grid-3">
           <div className="stat">
-            <h3>50+</h3>
+            <h3>100+</h3>
             <p>Videos Produced</p>
           </div>
           <div className="stat">

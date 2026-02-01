@@ -12,7 +12,7 @@ export default function Pricing() {
           <div className="card pricing-card">
             <h3>STANDARD VIDEO PACK</h3>
             <ul>
-              <li>8 Reels</li>
+              <li>8 videos</li>
               <li>Ideal for regular content needs</li>
             </ul>
             <button
@@ -36,7 +36,6 @@ export default function Pricing() {
             <h3>CONTENT PACK</h3>
             <ul>
               <li>10 videos</li>
-              <li>3 posters</li>
               <li>Perfect mix of video + visual content</li>
             </ul>
             <button

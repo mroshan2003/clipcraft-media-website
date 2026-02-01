@@ -9,8 +9,8 @@ export default function Home() {
           </p>
 
           <h1>
-            Content That Sells <br />
-            <span className="highlight">Branding That Sticks</span>
+            From Pixels to Presence <br />
+            <span className="highlight">We craft Digital Identities</span>
           </h1>
 
           <p className="hero-sub">
