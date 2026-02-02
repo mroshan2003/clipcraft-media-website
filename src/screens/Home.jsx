@@ -5,7 +5,8 @@ export default function Home() {
         {/* LEFT SIDE */}
         <div className="hero-text">
           <p className="badge">
-            Video Editing • Digital Marketing • Personal Branding{" "}
+            Video Editing • Digital Marketing • Personal Branding • Website
+            Development{" "}
           </p>
 
           <h1>
