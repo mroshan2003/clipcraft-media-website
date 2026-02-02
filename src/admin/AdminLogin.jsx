@@ -12,12 +12,12 @@ export default function AdminLogin({ onLogin }) {
 
     // Call backend to verify password
     const res = await fetch(
-      "https://clipcraft-backend-oka9.onrender.com/api/clients/verify",
+      "https://api.clipcraftmedia.in/api/clients/verify",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ password }),
-      }
+      },
     );
 
     setLoading(false);

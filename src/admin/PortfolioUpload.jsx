@@ -28,10 +28,7 @@ export function PortfolioUpload({ adminKey, refresh }) {
     form.append("image", video);
 
     const xhr = new XMLHttpRequest();
-    xhr.open(
-      "POST",
-      "https://clipcraft-backend-oka9.onrender.com/api/portfolio/upload"
-    );
+    xhr.open("POST", "https://api.clipcraftmedia.in/api/portfolio/upload");
     xhr.setRequestHeader("x-admin-key", adminKey);
 
     let lastLoaded = 0;

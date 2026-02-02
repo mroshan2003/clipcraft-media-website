@@ -4,7 +4,7 @@ export default function Clients() {
   const [clients, setClients] = useState([]);
 
   useEffect(() => {
-    fetch("https://clipcraft-backend-oka9.onrender.com/api/clients")
+    fetch("https://api.clipcraftmedia.in/api/clients")
       .then((res) => res.json())
       .then((data) => setClients(data));
   }, []);
