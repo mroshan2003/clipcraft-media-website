@@ -4,10 +4,19 @@ export default function Clients() {
   const [clients, setClients] = useState([]);
 
   useEffect(() => {
-    fetch("https://api.clipcraftmedia.in/api/clients")
+    fetch("/clients.json") // 🔥 STATIC FILE (NO RENDER)
       .then((res) => res.json())
-      .then((data) => setClients(data));
+      .then(setClients)
+      .catch(() => setClients([]));
   }, []);
+
+  // Cloudinary optimizer (SAFE)
+  const optimizeImage = (url = "") =>
+    url.includes("/upload/")
+      ? url.replace("/upload/", "/upload/f_auto,q_auto,w_200/")
+      : url;
+
+  const displayClients = clients.length ? [...clients, ...clients] : [];
 
   return (
     <section className="clients-section reveal" id="brands">
@@ -16,7 +25,7 @@ export default function Clients() {
 
         <div className="clients-marquee">
           <div className="marquee-track-clients">
-            {[...clients, ...clients].map((client, i) => (
+            {displayClients.map((client, i) => (
               <div className="client-logo-box" key={i}>
                 <a
                   href={client.link || "#"}
@@ -24,9 +33,10 @@ export default function Clients() {
                   rel="noopener noreferrer"
                 >
                   <img
-                    src={client.imageUrl}
-                    alt={client.name}
+                    src={optimizeImage(client.imageUrl)}
+                    alt={client.name || "Client logo"}
                     className="client-logo"
+                    loading={i < 4 ? "eager" : "lazy"}
                   />
                 </a>
               </div>

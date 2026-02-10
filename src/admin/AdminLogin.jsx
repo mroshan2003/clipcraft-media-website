@@ -1,50 +1,50 @@
-import React, { useState } from "react";
-import "./adminStyles.css";
+// import React, { useState } from "react";
+// import "./adminStyles.css";
 
-export default function AdminLogin({ onLogin }) {
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+// export default function AdminLogin({ onLogin }) {
+//   const [password, setPassword] = useState("");
+//   const [loading, setLoading] = useState(false);
 
-  const login = async () => {
-    if (!password) return alert("Enter password");
+//   const login = async () => {
+//     if (!password) return alert("Enter password");
 
-    setLoading(true);
+//     setLoading(true);
 
-    // Call backend to verify password
-    const res = await fetch(
-      "https://api.clipcraftmedia.in/api/clients/verify",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ password }),
-      },
-    );
+//     // Call backend to verify password
+//     const res = await fetch(
+//       "https://api.clipcraftmedia.in/api/clients/verify",
+//       {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify({ password }),
+//       },
+//     );
 
-    setLoading(false);
+//     setLoading(false);
 
-    if (res.status === 200) {
-      onLogin(password); // password valid → login
-    } else {
-      alert("Invalid password!");
-    }
-  };
+//     if (res.status === 200) {
+//       onLogin(password); // password valid → login
+//     } else {
+//       alert("Invalid password!");
+//     }
+//   };
 
-  return (
-    <div className="admin-login-container">
-      <div className="admin-login-card">
-        <h1>Admin Login</h1>
+//   return (
+//     <div className="admin-login-container">
+//       <div className="admin-login-card">
+//         <h1>Admin Login</h1>
 
-        <input
-          type="password"
-          placeholder="Admin password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+//         <input
+//           type="password"
+//           placeholder="Admin password"
+//           value={password}
+//           onChange={(e) => setPassword(e.target.value)}
+//         />
 
-        <button onClick={login} disabled={loading}>
-          {loading ? "Checking..." : "Login"}
-        </button>
-      </div>
-    </div>
-  );
-}
+//         <button onClick={login} disabled={loading}>
+//           {loading ? "Checking..." : "Login"}
+//         </button>
+//       </div>
+//     </div>
+//   );
+// }

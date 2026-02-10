@@ -11,9 +11,9 @@ import Portfolio from "./screens/Portfolio";
 import FAQ from "./screens/Faq";
 import Contact from "./screens/Contact";
 import Footer from "./screens/Footer";
-import AdminLogin from "./admin/AdminLogin";
-import AdminDashboard from "./admin/AdminDashboard";
-import PortfolioDashboard from "./admin/PortfolioDashboard";
+// import AdminLogin from "./admin/AdminLogin";
+// import AdminDashboard from "./admin/AdminDashboard";
+// import PortfolioDashboard from "./admin/PortfolioDashboard";
 
 export default function App() {
   const [pos, setPos] = useState({ x: 0, y: 0 });
@@ -45,7 +45,7 @@ export default function App() {
           }
         });
       },
-      { threshold: 0.4 }
+      { threshold: 0.4 },
     );
 
     sections.forEach((s) => observer.observe(s));
@@ -82,35 +82,35 @@ export default function App() {
     return () => window.removeEventListener("scroll", revealOnScroll);
   }, []);
 
-  const [adminKey, setAdminKey] = useState(null);
+  // const [adminKey, setAdminKey] = useState(null);
 
-  if (window.location.pathname === "/admin/clients") {
-    return adminKey ? (
-      <div className={`section-${colorMode}`}>
-        <div className="cursor-main" style={{ left: pos.x, top: pos.y }} />
-        <AdminDashboard adminKey={adminKey} />
-      </div>
-    ) : (
-      <div className={`section-${colorMode}`}>
-        <div className="cursor-main" style={{ left: pos.x, top: pos.y }} />
-        <AdminLogin onLogin={(key) => setAdminKey(key)} />
-      </div>
-    );
-  }
+  // if (window.location.pathname === "/admin/clients") {
+  //   return adminKey ? (
+  //     <div className={`section-${colorMode}`}>
+  //       <div className="cursor-main" style={{ left: pos.x, top: pos.y }} />
+  //       <AdminDashboard adminKey={adminKey} />
+  //     </div>
+  //   ) : (
+  //     <div className={`section-${colorMode}`}>
+  //       <div className="cursor-main" style={{ left: pos.x, top: pos.y }} />
+  //       <AdminLogin onLogin={(key) => setAdminKey(key)} />
+  //     </div>
+  //   );
+  // }
 
-  if (window.location.pathname === "/admin/portfolio") {
-    return adminKey ? (
-      <div className={`section-${colorMode}`}>
-        <div className="cursor-main" style={{ left: pos.x, top: pos.y }} />
-        <PortfolioDashboard adminKey={adminKey} />
-      </div>
-    ) : (
-      <div className={`section-${colorMode}`}>
-        <div className="cursor-main" style={{ left: pos.x, top: pos.y }} />
-        <AdminLogin onLogin={setAdminKey} />
-      </div>
-    );
-  }
+  // if (window.location.pathname === "/admin/portfolio") {
+  //   return adminKey ? (
+  //     <div className={`section-${colorMode}`}>
+  //       <div className="cursor-main" style={{ left: pos.x, top: pos.y }} />
+  //       <PortfolioDashboard adminKey={adminKey} />
+  //     </div>
+  //   ) : (
+  //     <div className={`section-${colorMode}`}>
+  //       <div className="cursor-main" style={{ left: pos.x, top: pos.y }} />
+  //       <AdminLogin onLogin={setAdminKey} />
+  //     </div>
+  //   );
+  // }
 
   return (
     <>
@@ -128,6 +128,7 @@ export default function App() {
         <Contact />
         <Footer />
       </div>
+      <div className="film-grain" />
 
       {/* Floating WhatsApp icon */}
       <a

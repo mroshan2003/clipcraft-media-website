@@ -1,109 +1,219 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+
+/* ===================== PORTFOLIO ===================== */
 
 export default function Portfolio() {
   const [items, setItems] = useState([]);
-  const [activeCategory, setActiveCategory] = useState(null);
+  const [activeVideoId, setActiveVideoId] = useState(null);
+  const [mutedVideoId, setMutedVideoId] = useState(null);
 
   useEffect(() => {
-    fetch("https://clipcraft-backend-oka9.onrender.com/api/portfolio")
+    fetch("/portfolio.json")
       .then((res) => res.json())
-      .then((data) => setItems(data));
+      .then(setItems)
+      .catch(console.error);
   }, []);
 
-  const filteredItems = activeCategory
-    ? items.filter((item) => item.category === activeCategory)
-    : [];
+  /* ================= MANUAL SCROLL LOGIC ================= */
 
-  // Touch drag scrolling
-  const handleTouchScroll = (e) => {
-    const container = e.currentTarget;
-    const touch = e.touches[0];
+  useEffect(() => {
+    const marquees = document.querySelectorAll(".manual-scroll");
 
-    if (!container.startX) {
-      container.startX = touch.clientX;
-      container.scrollLeftStart = container.scrollLeft;
+    marquees.forEach((marquee) => {
+      let isDown = false;
+      let startX = 0;
+      let scrollLeft = 0;
+
+      const startDrag = (x) => {
+        isDown = true;
+        marquee.classList.add("paused");
+        startX = x;
+        scrollLeft = marquee.scrollLeft;
+      };
+
+      const moveDrag = (x) => {
+        if (!isDown) return;
+        const walk = (x - startX) * 1.5;
+        marquee.scrollLeft = scrollLeft - walk;
+      };
+
+      const stopDrag = () => {
+        isDown = false;
+        marquee.classList.remove("paused");
+      };
+
+      /* 🖱️ Mouse */
+      marquee.addEventListener("mousedown", (e) => startDrag(e.pageX));
+      marquee.addEventListener("mousemove", (e) => moveDrag(e.pageX));
+      marquee.addEventListener("mouseup", stopDrag);
+      marquee.addEventListener("mouseleave", stopDrag);
+
+      /* 📱 Touch */
+      marquee.addEventListener("touchstart", (e) =>
+        startDrag(e.touches[0].pageX),
+      );
+      marquee.addEventListener("touchmove", (e) =>
+        moveDrag(e.touches[0].pageX),
+      );
+      marquee.addEventListener("touchend", stopDrag);
+
+      /* 🖱️ Wheel */
+      marquee.addEventListener(
+        "wheel",
+        (e) => {
+          marquee.classList.add("paused");
+          marquee.scrollLeft += e.deltaY;
+          clearTimeout(marquee._wheelTimeout);
+          marquee._wheelTimeout = setTimeout(() => {
+            marquee.classList.remove("paused");
+          }, 300);
+        },
+        { passive: true },
+      );
+    });
+  }, []);
+
+  const shootEdit = items.filter((i) => i.category === "shoot_edit");
+  const editOnly = items.filter((i) => i.category === "edit_only");
+
+  return (
+    <section className="portfolio-section" id="portfolio">
+      <div className="container">
+        <h2 className="portfolio-title">Our Work</h2>
+
+        <h3 className="row-title">Shoot + Edit</h3>
+        <div className="marquee left manual-scroll">
+          <div className="marquee-track">
+            {[...shootEdit, ...shootEdit].map((item, index) => {
+              const instanceId = `shoot-${item._id}-${index}`;
+              return (
+                <VideoCard
+                  key={instanceId}
+                  instanceId={instanceId}
+                  item={item}
+                  activeVideoId={activeVideoId}
+                  setActiveVideoId={setActiveVideoId}
+                  mutedVideoId={mutedVideoId}
+                  setMutedVideoId={setMutedVideoId}
+                />
+              );
+            })}
+          </div>
+        </div>
+
+        <h3 className="row-title">Edit Only</h3>
+        <div className="marquee right manual-scroll">
+          <div className="marquee-track">
+            {[...editOnly, ...editOnly].map((item, index) => {
+              const instanceId = `edit-${item._id}-${index}`;
+              return (
+                <VideoCard
+                  key={instanceId}
+                  instanceId={instanceId}
+                  item={item}
+                  activeVideoId={activeVideoId}
+                  setActiveVideoId={setActiveVideoId}
+                  mutedVideoId={mutedVideoId}
+                  setMutedVideoId={setMutedVideoId}
+                />
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ===================== VIDEO CARD ===================== */
+
+function VideoCard({
+  item,
+  instanceId,
+  activeVideoId,
+  setActiveVideoId,
+  mutedVideoId,
+  setMutedVideoId,
+}) {
+  const videoRef = useRef(null);
+
+  const isPlaying = activeVideoId === instanceId;
+  const isMuted = mutedVideoId === instanceId;
+
+  /* ▶️ Sync play state */
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (!isPlaying) {
+      video.pause();
+      video.currentTime = 0;
+      video.muted = true;
     }
+  }, [isPlaying]);
 
-    const delta = touch.clientX - container.startX;
-    container.scrollLeft = container.scrollLeftStart - delta;
+  /* 🔥 Auto pause when out of view */
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || !isPlaying) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          setActiveVideoId(null);
+        }
+      },
+      { threshold: 0.25 },
+    );
+
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, [isPlaying, setActiveVideoId]);
+
+  const handleMouseEnter = () => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.muted = true;
+    video.play().catch(() => {});
+    setActiveVideoId(instanceId);
+    setMutedVideoId(instanceId);
   };
 
-  const resetTouchVars = (e) => {
-    e.currentTarget.startX = null;
+  const handleMouseLeave = () => {
+    setActiveVideoId(null);
+  };
+
+  const toggleMute = (e) => {
+    e.stopPropagation();
+    const video = videoRef.current;
+    if (!video) return;
+
+    const nextMuted = !isMuted;
+    video.muted = nextMuted;
+    setMutedVideoId(nextMuted ? instanceId : null);
   };
 
   return (
-    <section className="section section-dark" id="portfolio">
-      <div className="container">
-        <h2 className="section-title">Portfolio</h2>
+    <div
+      className={`portfolio-card ${isPlaying ? "active" : ""}`}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <video
+        ref={videoRef}
+        src={item.imageUrl}
+        loop
+        muted
+        playsInline
+        preload="auto"
+      />
 
-        <div className="portfolio-category-buttons">
-          <button
-            className={`portfolio-btn ${
-              activeCategory === "shoot_edit" ? "active" : ""
-            }`}
-            onClick={() => setActiveCategory("shoot_edit")}
-          >
-            Shoot + Edit
-          </button>
-
-          <button
-            className={`portfolio-btn ${
-              activeCategory === "edit_only" ? "active" : ""
-            }`}
-            onClick={() => setActiveCategory("edit_only")}
-          >
-            Edit Only
-          </button>
-        </div>
-
-        {/* SHOW VIDEOS ONLY AFTER CLICK */}
-        {activeCategory && (
-          <div
-            className="portfolio-scroll-wrapper"
-            onTouchMove={handleTouchScroll}
-            onTouchEnd={resetTouchVars}
-          >
-            <div className="portfolio-scroll">
-              {filteredItems.map((item) => (
-                <div
-                  className="portfolio-item"
-                  key={item._id}
-                  onMouseEnter={(e) =>
-                    e.currentTarget.classList.add("active-video")
-                  }
-                  onMouseLeave={(e) =>
-                    e.currentTarget.classList.remove("active-video")
-                  }
-                >
-                  <video
-                    src={item.imageUrl}
-                    muted
-                    playsInline
-                    loop
-                    onMouseEnter={(e) => {
-                      e.target.muted = false;
-                      e.target.play();
-                    }}
-                    onMouseLeave={(e) => {
-                      e.target.muted = true;
-                      e.target.pause();
-                      e.target.currentTime = 0;
-                    }}
-                  />
-                </div>
-              ))}
-
-              {/* DUPLICATE FOR INFINITE SCROLL */}
-              {filteredItems.map((item) => (
-                <div className="portfolio-item" key={item._id + "-clone"}>
-                  <video src={item.imageUrl} muted playsInline loop />
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-    </section>
+      {isPlaying && (
+        <button className="mute-btn" onClick={toggleMute}>
+          {isMuted ? "🔇" : "🔊"}
+        </button>
+      )}
+    </div>
   );
 }

@@ -9,7 +9,9 @@
   z-index: 99999;
   transform: translate(-50%, -50%);
   mix-blend-mode: difference; /* cut-out effect */
-  transition: transform 0.15s ease-out, background 0.3s ease-out;
+  transition:
+    transform 0.15s ease-out,
+    background 0.3s ease-out;
 }
 
 .cursor-ripple {
@@ -156,7 +158,9 @@
 
 /* Glow ring */
 .step-img:hover {
-  box-shadow: 0 0 25px 5px #f97316, 0 0 40px 10px #e2ba9d;
+  box-shadow:
+    0 0 25px 5px #f97316,
+    0 0 40px 10px #e2ba9d;
   transform: scale(1.08);
 }
 
@@ -236,8 +240,11 @@
   border: 1px solid transparent;
   cursor: pointer;
   text-decoration: none;
-  transition: background var(--transition), color var(--transition),
-    border var(--transition), transform var(--transition),
+  transition:
+    background var(--transition),
+    color var(--transition),
+    border var(--transition),
+    transform var(--transition),
     box-shadow var(--transition);
 }
 
@@ -474,7 +481,9 @@
   border: 1px solid rgba(148, 163, 184, 0.25);
   background: rgba(15, 23, 42, 0.9);
   padding: 1.4rem 1.5rem;
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
 .card:hover {
@@ -594,111 +603,173 @@
   transform: translateY(-2px);
 }
 
-/* Portfolio */
+/* ================= PORTFOLIO ================= */
 
-/* Outer wrapper */
-.portfolio-scroll-wrapper {
-  width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding: 15px 0;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-.portfolio-scroll-wrapper::-webkit-scrollbar {
-  display: none;
+.portfolio-section {
+  background: #0b0b0b;
+  padding: 80px 0;
+  overflow: hidden;
 }
 
-/* ONE infinite row */
-.portfolio-scroll {
-  display: inline-flex; /* IMPORTANT for infinite scroll */
+.portfolio-title {
+  text-align: center;
+  font-size: 42px;
+  color: #fff;
+  margin-bottom: 50px;
+}
+
+.row-title {
+  color: #aaa;
+  font-size: 20px;
+  margin: 20px 0 12px 10px;
+  letter-spacing: 1px;
+}
+
+/* ================= MARQUEE ================= */
+
+.marquee-track {
+  display: flex;
   width: max-content;
-  gap: 28px; /* More spacing */
-  animation: scrollLeft 25s linear infinite;
+  gap: 30px;
 }
 
-/* Pause when hovering */
-.portfolio-scroll:hover {
+.marquee.left .marquee-track {
+  animation: scroll-right 35s linear infinite;
+}
+
+/* Opposite direction row */
+.marquee.right .marquee-track {
+  animation: scroll-left 35s linear infinite;
+}
+
+.marquee:hover .marquee-track {
   animation-play-state: paused;
 }
 
-/* Scroll wrapper stays scrollable */
-.portfolio-scroll-wrapper {
-  overflow-x: auto;
-  cursor: grab;
-}
-.portfolio-scroll-wrapper:active {
-  cursor: grabbing;
-}
-
-/* When hovering anywhere inside the row → blur all videos */
-.portfolio-scroll:hover .portfolio-item video {
-  filter: blur(4px);
-  opacity: 0.4;
-  transition: 0.35s ease;
-}
-
-/* Hovered video stays clear */
-.portfolio-item.active-video video {
-  filter: none !important;
-  opacity: 1 !important;
-  transform: scale(1.08);
-  z-index: 5;
-  position: relative;
-}
-
-/* Make sure blur doesn't block scrolling */
-.portfolio-item,
-.portfolio-item video {
-  pointer-events: auto;
-}
-
-/* 🚀 Bigger portrait videos for Desktop */
-.portfolio-item video {
-  width: 230px; /* 🔥 much bigger */
-  height: 400px; /* 🔥 tall reel style */
-  object-fit: cover;
-  border-radius: 16px;
-  background: #000;
-
-  box-shadow: 0 0 25px rgba(255, 140, 20, 0.35);
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
-}
-
-/* Hover enhancement */
-.portfolio-item video:hover {
-  transform: scale(1.08);
-  box-shadow: 0 0 32px rgba(255, 140, 20, 0.55);
-}
-
-/* Smooth infinite animation */
-@keyframes scrollLeft {
-  0% {
+@keyframes scroll-left {
+  from {
     transform: translateX(0);
   }
-  100% {
+  to {
     transform: translateX(-50%);
   }
 }
 
-/* 📱 Mobile View — slightly smaller but still large */
-@media (max-width: 768px) {
-  .portfolio-scroll {
-    animation-duration: 30s; /* faster */
-    gap: 18px;
+@keyframes scroll-right {
+  from {
+    transform: translateX(-50%);
   }
-
-  .portfolio-item video {
-    width: 180px;
-    height: 320px;
+  to {
+    transform: translateX(0);
   }
 }
 
-/* 📱 Very small phones */
-@media (max-width: 480px) {
-  .portfolio-item video {
-    width: 150px;
-    height: 280px;
+/* ================= VIDEO CARD ================= */
+
+.portfolio-card {
+  width: 260px;
+  height: 380px;
+  max-width: 200px;
+  aspect-ratio: 9 / 16;
+  position: relative;
+  overflow: visible; /* IMPORTANT for bulge */
+  border-radius: 14px;
+  background: #000;
+  cursor: pointer;
+  flex-shrink: 0;
+
+  transform-style: preserve-3d;
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+/* ================= VIDEO ================= */
+
+.portfolio-card video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 14px;
+
+  transform-origin: center;
+  transform-style: preserve-3d;
+
+  transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: transform;
+}
+
+/* ================= HOVER (≈ 30px bulge) ================= */
+
+.portfolio-card:hover {
+  z-index: 10;
+  transform: translateZ(30px);
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.6),
+    0 0 40px rgba(255, 255, 255, 0.08);
+}
+
+.portfolio-card:hover video {
+  transform: scale(1.18);
+}
+
+/* ================= ACTIVE / CLICK (≈ 50px bulge) ================= */
+
+.portfolio-card.active {
+  z-index: 50;
+  transform: translateZ(30px);
+  box-shadow:
+    0 40px 100px rgba(0, 0, 0, 0.8),
+    0 0 60px rgba(255, 255, 255, 0.15);
+}
+
+.portfolio-card.active video {
+  transform: scale(1.18);
+}
+
+/* ================= MUTE BUTTON ================= */
+.mute-btn {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  background: rgba(0, 0, 0, 0.6);
+  border: none;
+  color: white;
+  font-size: 18px;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition:
+    background 0.25s ease,
+    transform 0.2s ease;
+}
+
+.mute-btn:hover {
+  background: rgba(0, 0, 0, 0.85);
+  transform: scale(1.1);
+}
+
+/* ================= MOBILE ================= */
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .portfolio-card {
+    width: 220px;
+    height: 330px;
+  }
+
+  .portfolio-card.active {
+    transform: scale(1.05);
   }
 }
 
