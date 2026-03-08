@@ -20,11 +20,11 @@ export default function Pricing() {
               onClick={() => {
                 const pkg = "STANDARD VIDEO PACK";
                 const msg = `Hi, I want more details about "${pkg}"`;
-                const phone = "8778223527";
+                const phone = "6380456681";
 
                 window.open(
                   `https://wa.me/91${phone}?text=${encodeURIComponent(msg)}`,
-                  "_blank"
+                  "_blank",
                 );
               }}
             >
@@ -47,7 +47,7 @@ export default function Pricing() {
 
                 window.open(
                   `https://wa.me/91${phone}?text=${encodeURIComponent(msg)}`,
-                  "_blank"
+                  "_blank",
                 );
               }}
             >
@@ -70,7 +70,7 @@ export default function Pricing() {
 
                 window.open(
                   `https://wa.me/91${phone}?text=${encodeURIComponent(msg)}`,
-                  "_blank"
+                  "_blank",
                 );
               }}
             >

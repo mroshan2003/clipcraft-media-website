@@ -21,7 +21,7 @@ export default function Home() {
 
           <div className="hero-actions">
             <a
-              href="https://wa.me/918778223527?text=I%20saw%20your%20works%2C%20can%20you%20share%20the%20package%20details%20%3F"
+              href="https://wa.me/916380456681?text=I%20saw%20your%20works%2C%20can%20you%20share%20the%20package%20details%20%3F"
               className="btn btn-primary"
               target="_blank"
               rel="noopener noreferrer"
@@ -35,7 +35,7 @@ export default function Home() {
           </div>
 
           <div className="hero-meta">
-            <span>50+ videos produced</span>
+            <span>8947 videos produced</span>
             <span>10M+ views generated</span>
           </div>
         </div>

@@ -41,14 +41,14 @@ export default function Contact() {
             {/* WhatsApp */}
             <li className="contact-card">
               <a
-                href="https://wa.me/918778223527?text=Hi%2C%20I%20want%20more%20details."
+                href="https://wa.me/916380456681?text=Hi%2C%20I%20want%20more%20details."
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <div className="icon-box">
                   <i className="fa-brands fa-whatsapp"></i>
                 </div>
-                <span>+91-8778223527</span>
+                <span>+91-6380456681</span>
               </a>
             </li>
 

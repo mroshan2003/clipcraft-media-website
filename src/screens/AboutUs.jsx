@@ -1,14 +1,22 @@
+import CountUp from "react-countup";
+import { useInView } from "react-intersection-observer";
+
 export default function AboutUs() {
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.4,
+  });
+
   const steps = [
     {
       title: "Mohammed Yusuf M",
-      desc: "Founder of Clipcraft Media | Video Editor",
+      desc: "Founder of CCM | Video Editor",
       img: "Yusuf.jpg",
       link: "https://www.instagram.com/clipcraftor03/",
     },
     {
       title: "Mohamed Roshan Akthar M",
-      desc: "Co-Founder of Clipcraft Media",
+      desc: "Co-Founder of CCM | Web Developer",
       img: "Roshan.png",
       link: "https://www.instagram.com/itz_me._.rxsxhxn._/",
     },
@@ -36,18 +44,20 @@ export default function AboutUs() {
         </div>
       </section>
 
-      <section className="section stats reveal">
+      <section className="section stats reveal" ref={ref}>
         <div className="container grid grid-3">
           <div className="stat">
-            <h3>100+</h3>
+            <h3>{inView && <CountUp end={8947} duration={2.5} />}</h3>
             <p>Videos Produced</p>
           </div>
+
           <div className="stat">
-            <h3>10M+</h3>
+            <h3>{inView && <CountUp end={10} duration={2.5} />}M+</h3>
             <p>Views Generated</p>
           </div>
+
           <div className="stat">
-            <h3>10+</h3>
+            <h3>{inView && <CountUp end={19} duration={2.5} />}</h3>
             <p>Clients Worked With</p>
           </div>
         </div>

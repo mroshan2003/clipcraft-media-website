@@ -2,12 +2,15 @@ export default function Reviews() {
   const reviews = [
     {
       text: "Their video content and social media strategy helped us reach more clients in just 30 days than we did in the past six months. Professional team, smooth process, and incredible results.",
+      tag: "-Arjun",
     },
     {
       text: "They handled our monthly reels, edits, and all branding creatives. Every deliverable was high-quality and perfectly on-brand.",
+      tag: "-Ravi",
     },
     {
       text: "Clipcraft Media created a clean, powerful video ad that performed way beyond expectations. Their understanding of storytelling is next level.",
+      tag: "-Shyam",
     },
   ];
 

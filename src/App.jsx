@@ -132,7 +132,7 @@ export default function App() {
 
       {/* Floating WhatsApp icon */}
       <a
-        href="https://wa.me/918778223527?text=I%20saw%20your%20works%2C%20can%20you%20share%20the%20package%20details%20%3F"
+        href="https://wa.me/916380456681?text=I%20saw%20your%20works%2C%20can%20you%20share%20the%20package%20details%20%3F"
         className="whatsapp-float"
         target="_blank"
         rel="noreferrer"
