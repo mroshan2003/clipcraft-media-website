@@ -10,31 +10,17 @@ export default function Contact() {
           </p>
 
           <ul className="contact-list upgraded-contact">
-            {/* Location */}
+            {/* Instagram */}
             <li className="contact-card">
               <a
-                href="https://www.google.com/maps/search/Ramanathapuram,+Tamil+Nadu"
+                href="https://www.instagram.com/clipcraftor03/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <div className="icon-box">
-                  <i className="fa-solid fa-location-dot"></i>
+                  <i className="fa-brands fa-instagram"></i>
                 </div>
-                <span>Ramanathapuram, Tamil Nadu</span>
-              </a>
-            </li>
-
-            {/* Email */}
-            <li className="contact-card">
-              <a
-                href="mailto:clipcraftmedia03@gmail.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <div className="icon-box">
-                  <i className="fa-solid fa-envelope"></i>
-                </div>
-                <span>clipcraftmedia03@gmail.com</span>
+                <span>clipcraftmedia.03</span>
               </a>
             </li>
 
@@ -52,17 +38,31 @@ export default function Contact() {
               </a>
             </li>
 
-            {/* Instagram */}
+            {/* Email */}
             <li className="contact-card">
               <a
-                href="https://www.instagram.com/clipcraftor03/"
+                href="mailto:clipcraftmedia03@gmail.com"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <div className="icon-box">
-                  <i className="fa-brands fa-instagram"></i>
+                  <i className="fa-solid fa-envelope"></i>
                 </div>
-                <span>clipcraftmedia.03</span>
+                <span>clipcraftmedia03@gmail.com</span>
+              </a>
+            </li>
+
+            {/* Location */}
+            <li className="contact-card">
+              <a
+                href="https://www.google.com/maps/search/Ramanathapuram,+Tamil+Nadu"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div className="icon-box">
+                  <i className="fa-solid fa-location-dot"></i>
+                </div>
+                <span>Ramanathapuram, Tamil Nadu</span>
               </a>
             </li>
           </ul>

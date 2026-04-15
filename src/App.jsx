@@ -121,10 +121,10 @@ export default function App() {
         <Home />
         <Clients />
         <Reviews />
-        <AboutUs />
         <Pricing />
         <Portfolio />
         <FAQ />
+        <AboutUs />
         <Contact />
         <Footer />
       </div>

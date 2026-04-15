@@ -603,176 +603,6 @@
   transform: translateY(-2px);
 }
 
-/* ================= PORTFOLIO ================= */
-
-.portfolio-section {
-  background: #0b0b0b;
-  padding: 80px 0;
-  overflow: hidden;
-}
-
-.portfolio-title {
-  text-align: center;
-  font-size: 42px;
-  color: #fff;
-  margin-bottom: 50px;
-}
-
-.row-title {
-  color: #aaa;
-  font-size: 20px;
-  margin: 20px 0 12px 10px;
-  letter-spacing: 1px;
-}
-
-/* ================= MARQUEE ================= */
-
-.marquee-track {
-  display: flex;
-  width: max-content;
-  gap: 30px;
-}
-
-.marquee.left .marquee-track {
-  animation: scroll-right 35s linear infinite;
-}
-
-/* Opposite direction row */
-.marquee.right .marquee-track {
-  animation: scroll-left 35s linear infinite;
-}
-
-.marquee:hover .marquee-track {
-  animation-play-state: paused;
-}
-
-@keyframes scroll-left {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-@keyframes scroll-right {
-  from {
-    transform: translateX(-50%);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
-
-/* ================= VIDEO CARD ================= */
-
-.portfolio-card {
-  width: 260px;
-  height: 380px;
-  max-width: 200px;
-  aspect-ratio: 9 / 16;
-  position: relative;
-  overflow: visible; /* IMPORTANT for bulge */
-  border-radius: 14px;
-  background: #000;
-  cursor: pointer;
-  flex-shrink: 0;
-
-  transform-style: preserve-3d;
-
-  transition:
-    transform 0.35s ease,
-    box-shadow 0.35s ease;
-}
-
-/* ================= VIDEO ================= */
-
-.portfolio-card video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  border-radius: 14px;
-
-  transform-origin: center;
-  transform-style: preserve-3d;
-
-  transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
-  will-change: transform;
-}
-
-/* ================= HOVER (≈ 30px bulge) ================= */
-
-.portfolio-card:hover {
-  z-index: 10;
-  transform: translateZ(30px);
-  box-shadow:
-    0 25px 60px rgba(0, 0, 0, 0.6),
-    0 0 40px rgba(255, 255, 255, 0.08);
-}
-
-.portfolio-card:hover video {
-  transform: scale(1.18);
-}
-
-/* ================= ACTIVE / CLICK (≈ 50px bulge) ================= */
-
-.portfolio-card.active {
-  z-index: 50;
-  transform: translateZ(30px);
-  box-shadow:
-    0 40px 100px rgba(0, 0, 0, 0.8),
-    0 0 60px rgba(255, 255, 255, 0.15);
-}
-
-.portfolio-card.active video {
-  transform: scale(1.18);
-}
-
-/* ================= MUTE BUTTON ================= */
-.mute-btn {
-  position: absolute;
-  bottom: 14px;
-  right: 14px;
-  background: rgba(0, 0, 0, 0.6);
-  border: none;
-  color: white;
-  font-size: 18px;
-  padding: 10px;
-  border-radius: 50%;
-  cursor: pointer;
-  backdrop-filter: blur(6px);
-  transition:
-    background 0.25s ease,
-    transform 0.2s ease;
-}
-
-.mute-btn:hover {
-  background: rgba(0, 0, 0, 0.85);
-  transform: scale(1.1);
-}
-
-/* ================= MOBILE ================= */
-@keyframes slideUp {
-  from {
-    transform: translateY(100%);
-  }
-  to {
-    transform: translateY(0);
-  }
-}
-
-@media (max-width: 768px) {
-  .portfolio-card {
-    width: 220px;
-    height: 330px;
-  }
-
-  .portfolio-card.active {
-    transform: scale(1.05);
-  }
-}
-
 /* Blog */
 
 .blog-card {
@@ -1493,8 +1323,6 @@ html {
   }
 }
 
-/* Portfolio videos */
-
 /* Contact grid */
 @media (max-width: 768px) {
   .contact-grid {
@@ -1550,44 +1378,113 @@ html {
   }
 }
 
-.portfolio-category-buttons {
+.portfolio {
+  padding: 80px 6%;
+  background: #0f0f0f;
+  color: white;
+}
+
+.portfolio-title {
+  font-size: 40px;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.category {
+  font-size: 24px;
+  margin: 30px 0 20px;
+}
+
+.scroll-row {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 20px;
+}
+
+.scroll-row::-webkit-scrollbar {
+  display: none;
+}
+
+.video-card {
+  width: 200px;
+  height: 360px;
+  border-radius: 14px;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.video-card video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: 0.3s;
+}
+
+.video-card:hover .overlay {
+  opacity: 1;
+}
+
+.play {
+  font-size: 30px;
+  margin-bottom: 8px;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 24px;
-  margin: 50px 0 60px;
+  z-index: 1000;
 }
 
-.portfolio-btn {
-  padding: 14px 36px;
-  border-radius: 40px;
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  color: #fff;
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
+.modal-video {
+  height: 90vh;
+  max-width: 420px;
+  position: relative;
 }
 
-.portfolio-btn:hover {
-  border-color: #ff7a00;
-  color: #ff7a00;
-}
-
-.portfolio-btn.active {
-  background: #ff7a00;
-  color: #000;
-  border-color: #ff7a00;
-  box-shadow: 0 0 20px rgba(255, 122, 0, 0.5);
-}
-
-.category-select {
+.modal-video video {
   width: 100%;
-  padding: 12px 16px;
+  height: 100%;
+  object-fit: contain;
   border-radius: 10px;
-  background: #0b1220;
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  margin-bottom: 16px;
+}
+
+.close {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: white;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .video-card {
+    width: 160px;
+    height: 280px;
+  }
+
+  .modal-video {
+    height: 85vh;
+  }
 }

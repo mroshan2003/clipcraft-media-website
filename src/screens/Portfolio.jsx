@@ -1,219 +1,157 @@
-import { useEffect, useState, useRef } from "react";
-
-/* ===================== PORTFOLIO ===================== */
+import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Portfolio() {
   const [items, setItems] = useState([]);
-  const [activeVideoId, setActiveVideoId] = useState(null);
-  const [mutedVideoId, setMutedVideoId] = useState(null);
+  const [activeVideo, setActiveVideo] = useState(null);
+
+  const shootRef = useRef(null);
+  const editRef = useRef(null);
+
+  const shootPaused = useRef(false);
+  const editPaused = useRef(false);
 
   useEffect(() => {
     fetch("/portfolio.json")
       .then((res) => res.json())
-      .then(setItems)
-      .catch(console.error);
+      .then(setItems);
   }, []);
 
-  /* ================= MANUAL SCROLL LOGIC ================= */
-
+  /* ================= SET INITIAL SCROLL POSITION ================= */
   useEffect(() => {
-    const marquees = document.querySelectorAll(".manual-scroll");
+    const shootEl = shootRef.current;
+    const editEl = editRef.current;
 
-    marquees.forEach((marquee) => {
-      let isDown = false;
-      let startX = 0;
-      let scrollLeft = 0;
+    if (shootEl) shootEl.scrollLeft = 0;
+    if (editEl) editEl.scrollLeft = editEl.scrollWidth / 2; // start middle for opposite scroll
+  }, [items]);
 
-      const startDrag = (x) => {
-        isDown = true;
-        marquee.classList.add("paused");
-        startX = x;
-        scrollLeft = marquee.scrollLeft;
+  /* ================= AUTO SCROLL ================= */
+  useEffect(() => {
+    let frame;
+
+    const animate = () => {
+      const scrollRow = (el, pausedRef, direction = 1) => {
+        if (!el) return;
+        if (!pausedRef.current) {
+          el.scrollLeft += 0.5 * direction;
+          if (direction === 1 && el.scrollLeft >= el.scrollWidth / 2)
+            el.scrollLeft = 0;
+          if (direction === -1 && el.scrollLeft <= 0)
+            el.scrollLeft = el.scrollWidth / 2;
+        }
       };
 
-      const moveDrag = (x) => {
-        if (!isDown) return;
-        const walk = (x - startX) * 1.5;
-        marquee.scrollLeft = scrollLeft - walk;
-      };
+      scrollRow(shootRef.current, shootPaused, 1); // right
+      scrollRow(editRef.current, editPaused, -1); // left
 
-      const stopDrag = () => {
-        isDown = false;
-        marquee.classList.remove("paused");
-      };
+      frame = requestAnimationFrame(animate);
+    };
 
-      /* 🖱️ Mouse */
-      marquee.addEventListener("mousedown", (e) => startDrag(e.pageX));
-      marquee.addEventListener("mousemove", (e) => moveDrag(e.pageX));
-      marquee.addEventListener("mouseup", stopDrag);
-      marquee.addEventListener("mouseleave", stopDrag);
-
-      /* 📱 Touch */
-      marquee.addEventListener("touchstart", (e) =>
-        startDrag(e.touches[0].pageX),
-      );
-      marquee.addEventListener("touchmove", (e) =>
-        moveDrag(e.touches[0].pageX),
-      );
-      marquee.addEventListener("touchend", stopDrag);
-
-      /* 🖱️ Wheel */
-      marquee.addEventListener(
-        "wheel",
-        (e) => {
-          marquee.classList.add("paused");
-          marquee.scrollLeft += e.deltaY;
-          clearTimeout(marquee._wheelTimeout);
-          marquee._wheelTimeout = setTimeout(() => {
-            marquee.classList.remove("paused");
-          }, 300);
-        },
-        { passive: true },
-      );
-    });
+    animate();
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   const shootEdit = items.filter((i) => i.category === "shoot_edit");
   const editOnly = items.filter((i) => i.category === "edit_only");
 
   return (
-    <section className="portfolio-section" id="portfolio">
-      <div className="container">
-        <h2 className="portfolio-title">Our Work</h2>
+    <section className="portfolio">
+      <h2 className="portfolio-title">Our Work</h2>
 
-        <h3 className="row-title">Shoot + Edit</h3>
-        <div className="marquee left manual-scroll">
-          <div className="marquee-track">
-            {[...shootEdit, ...shootEdit].map((item, index) => {
-              const instanceId = `shoot-${item._id}-${index}`;
-              return (
-                <VideoCard
-                  key={instanceId}
-                  instanceId={instanceId}
-                  item={item}
-                  activeVideoId={activeVideoId}
-                  setActiveVideoId={setActiveVideoId}
-                  mutedVideoId={mutedVideoId}
-                  setMutedVideoId={setMutedVideoId}
-                />
-              );
-            })}
-          </div>
-        </div>
-
-        <h3 className="row-title">Edit Only</h3>
-        <div className="marquee right manual-scroll">
-          <div className="marquee-track">
-            {[...editOnly, ...editOnly].map((item, index) => {
-              const instanceId = `edit-${item._id}-${index}`;
-              return (
-                <VideoCard
-                  key={instanceId}
-                  instanceId={instanceId}
-                  item={item}
-                  activeVideoId={activeVideoId}
-                  setActiveVideoId={setActiveVideoId}
-                  mutedVideoId={mutedVideoId}
-                  setMutedVideoId={setMutedVideoId}
-                />
-              );
-            })}
-          </div>
-        </div>
+      {/* ================= SHOOT + EDIT ================= */}
+      <h3 className="category">Shoot + Edit</h3>
+      <div className="scroll-row" ref={shootRef}>
+        {[...shootEdit, ...shootEdit, ...shootEdit].map((item, i) => (
+          <VideoCard
+            key={i}
+            item={item}
+            setActiveVideo={setActiveVideo}
+            pause={() => (shootPaused.current = true)}
+            resume={() => (shootPaused.current = false)}
+          />
+        ))}
       </div>
+
+      {/* ================= EDIT ONLY ================= */}
+      <h3 className="category">Edit Only</h3>
+      <div className="scroll-row" ref={editRef}>
+        {[...editOnly, ...editOnly, ...editOnly].map((item, i) => (
+          <VideoCard
+            key={i}
+            item={item}
+            setActiveVideo={setActiveVideo}
+            pause={() => (editPaused.current = true)}
+            resume={() => (editPaused.current = false)}
+          />
+        ))}
+      </div>
+
+      {/* ================= MODAL ================= */}
+      <AnimatePresence>
+        {activeVideo && (
+          <VideoModal video={activeVideo} close={() => setActiveVideo(null)} />
+        )}
+      </AnimatePresence>
     </section>
   );
 }
 
-/* ===================== VIDEO CARD ===================== */
-
-function VideoCard({
-  item,
-  instanceId,
-  activeVideoId,
-  setActiveVideoId,
-  mutedVideoId,
-  setMutedVideoId,
-}) {
+/* ================= VIDEO CARD ================= */
+function VideoCard({ item, setActiveVideo, pause, resume }) {
   const videoRef = useRef(null);
 
-  const isPlaying = activeVideoId === instanceId;
-  const isMuted = mutedVideoId === instanceId;
-
-  /* ▶️ Sync play state */
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    if (!isPlaying) {
-      video.pause();
-      video.currentTime = 0;
-      video.muted = true;
-    }
-  }, [isPlaying]);
-
-  /* 🔥 Auto pause when out of view */
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video || !isPlaying) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) {
-          setActiveVideoId(null);
-        }
-      },
-      { threshold: 0.25 },
-    );
-
-    observer.observe(video);
-    return () => observer.disconnect();
-  }, [isPlaying, setActiveVideoId]);
-
-  const handleMouseEnter = () => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    video.muted = true;
-    video.play().catch(() => {});
-    setActiveVideoId(instanceId);
-    setMutedVideoId(instanceId);
+  const handleEnter = () => {
+    pause();
+    videoRef.current?.play().catch(() => {});
   };
 
-  const handleMouseLeave = () => {
-    setActiveVideoId(null);
-  };
-
-  const toggleMute = (e) => {
-    e.stopPropagation();
-    const video = videoRef.current;
-    if (!video) return;
-
-    const nextMuted = !isMuted;
-    video.muted = nextMuted;
-    setMutedVideoId(nextMuted ? instanceId : null);
+  const handleLeave = () => {
+    resume();
+    if (!videoRef.current) return;
+    videoRef.current.pause();
+    videoRef.current.currentTime = 0;
   };
 
   return (
-    <div
-      className={`portfolio-card ${isPlaying ? "active" : ""}`}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+    <motion.div
+      className="video-card"
+      whileHover={{ scale: 1.05 }}
+      onMouseEnter={handleEnter}
+      onMouseLeave={handleLeave}
+      onClick={() => setActiveVideo(item)}
     >
-      <video
-        ref={videoRef}
-        src={item.imageUrl}
-        loop
-        muted
-        playsInline
-        preload="auto"
-      />
+      <video ref={videoRef} src={item.imageUrl} muted loop playsInline />
+      <div className="overlay">
+        <div className="play">▶</div>
+        <p>{item.title}</p>
+      </div>
+    </motion.div>
+  );
+}
 
-      {isPlaying && (
-        <button className="mute-btn" onClick={toggleMute}>
-          {isMuted ? "🔇" : "🔊"}
+/* ================= MODAL ================= */
+function VideoModal({ video, close }) {
+  return (
+    <motion.div
+      className="modal"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={close}
+    >
+      <motion.div
+        className="modal-video"
+        initial={{ scale: 0.8 }}
+        animate={{ scale: 1 }}
+        exit={{ scale: 0.8 }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <video src={video.imageUrl} controls autoPlay />
+        <button className="close" onClick={close}>
+          ✕
         </button>
-      )}
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }

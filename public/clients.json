@@ -26,21 +26,6 @@
     "link": "https://www.instagram.com/wininteriors_rmd/"
   },
   {
-    "name": "RS Design",
-    "imageUrl": "https://res.cloudinary.com/de6jt21jd/image/upload/v1765390930/clients/smah41esta4bowkn6irj.png",
-    "link": "https://www.instagram.com/rsdesigns65/"
-  },
-  {
-    "name": "NMK Events",
-    "imageUrl": "https://res.cloudinary.com/de6jt21jd/image/upload/v1765390949/clients/vhio7bqxnk8hn0zws5ez.png",
-    "link": "https://www.instagram.com/nmk_event_management/"
-  },
-  {
-    "name": "Latchiya Paravai",
-    "imageUrl": "https://res.cloudinary.com/de6jt21jd/image/upload/v1765391067/clients/mmjor9a0morkzuf9mci3.png",
-    "link": "https://www.instagram.com/latchiyaparavai/"
-  },
-  {
     "name": "Fashion City",
     "imageUrl": "https://res.cloudinary.com/de6jt21jd/image/upload/v1770061747/clients/k7wxr125oumxw1dt1tkz.png",
     "link": "https://www.instagram.com/fashioncityrmd?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
@@ -49,5 +34,20 @@
     "name": "Sai Veetu Samayal",
     "imageUrl": "https://res.cloudinary.com/de6jt21jd/image/upload/v1770061791/clients/ofu4gm0k8k4b3cbpy1gf.png",
     "link": "https://www.instagram.com/saiveetusamayal?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+  },
+  {
+    "name": "KAS",
+    "imageUrl": "https://res.cloudinary.com/de6jt21jd/image/upload/v1776246777/KAS_logo_bzrxch.png",
+    "link": "https://www.instagram.com/kasgroupofschools?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+  },
+  {
+    "name": "CJ",
+    "imageUrl": "https://res.cloudinary.com/de6jt21jd/image/upload/v1776246776/CJ_pcnlyh.png",
+    "link": "https://www.instagram.com/crookjunk?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+  },
+  {
+    "name": "CJ",
+    "imageUrl": "https://res.cloudinary.com/de6jt21jd/image/upload/v1776246774/SW_logo_yprfrc.png",
+    "link": "https://www.instagram.com/swarnambigai.motor?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
   }
 ]
